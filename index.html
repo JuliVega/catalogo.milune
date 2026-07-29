@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milune Intimates | Catálogo</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+<meta name="description" content="Milune Intimates. Lencería hermosa, cómoda y de calidad, pensada para vos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rosa: #AF8995;
+    --rosa-suave: #cbaeb4;
+    --blanco: #FFFFFF;
+    --nude: #F2E8E1;
+    --gris-topo: #8C7B73;
+    --marron-rosado: #8B5F5A;
+    --texto: #F5EFEA;
+    --texto-secundario: #cdbcb1;
+    --fondo: #3d362e;
+    --borde: #6b5f52;
+    --maxw: 1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Poppins', sans-serif;
+    font-weight:300;
+    color:var(--texto);
+    background:var(--fondo);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:var(--fondo);
+    border-bottom:1px solid var(--borde);
+  }
+  .nav-wrap{
+    max-width:var(--maxw); margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 24px;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand img{height:46px; width:46px; border-radius:50%; object-fit:cover;}
+  nav.menu{display:flex; gap:32px;}
+  nav.menu a{
+    font-size:13px; letter-spacing:1.2px; text-transform:uppercase;
+    font-weight:400; color:var(--texto);
+    padding:6px 0; border-bottom:1px solid transparent;
+    transition:border-color .3s ease, color .3s ease;
+  }
+  nav.menu a:hover{color:var(--rosa); border-color:var(--rosa);}
+  .menu-toggle{display:none; background:none; border:none; font-size:26px; color:var(--rosa-suave); cursor:pointer; position:relative; z-index:101;}
+
+  .hero{
+    padding:150px 24px 70px;
+    text-align:center;
+    max-width:820px; margin:0 auto;
+  }
+  .hero .portada-img{
+    max-width:420px; width:80%; margin:0 auto; display:block;
+  }
+  .hero h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:400;
+    font-size:clamp(22px, 4vw, 32px);
+    letter-spacing:0.5px;
+    color:var(--texto);
+    margin:20px 0 16px;
+  }
+  .hero p{
+    font-size:16px; font-weight:300; color:var(--texto); opacity:0.85;
+    max-width:520px; margin:0 auto;
+  }
+
+  .buscador-wrap{
+    max-width:640px; margin:0 auto 50px;
+    padding:0 24px;
+  }
+  .buscador{
+    display:flex; align-items:center; gap:12px;
+    border-bottom:1px solid var(--borde);
+    padding:10px 4px;
+  }
+  .buscador svg{flex:0 0 auto; opacity:0.55;}
+  .buscador input{
+    flex:1; border:none; background:none; outline:none;
+    font-family:'Poppins', sans-serif; font-weight:300;
+    font-size:15px; color:var(--texto); letter-spacing:0.3px;
+  }
+  .buscador input::placeholder{color:var(--texto-secundario); opacity:0.7;}
+  .sin-resultados{
+    text-align:center; font-size:14px; color:var(--texto-secundario);
+    padding:30px 0; display:none; grid-column:1/-1;
+  }
+
+  .accesos{
+    max-width:var(--maxw); margin:0 auto;
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
+    padding:0 24px 90px;
+  }
+  .acceso{
+    position:relative; display:block; overflow:hidden;
+    background:var(--nude);
+    aspect-ratio:3/4;
+  }
+  .acceso .acceso-foto{
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .acceso img{
+    width:100%; height:100%; object-fit:cover; object-position:center top;
+    transition:transform .6s ease;
+  }
+  .acceso:hover img{transform:scale(1.04);}
+  .acceso::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(rgba(60,40,38,0.16), rgba(60,40,38,0.42));
+  }
+  .acceso-label{
+    position:absolute; left:0; right:0; top:50%; transform:translateY(-50%);
+    text-align:center; z-index:2; padding:14px 20px;
+    color:var(--blanco); font-size:19px; letter-spacing:2.5px; text-transform:uppercase;
+    font-weight:600; background:rgba(35,29,24,0.62);
+  }
+
+  section.categoria{
+    max-width:var(--maxw); margin:0 auto;
+    padding:70px 24px 40px;
+  }
+  .cat-header{text-align:center; margin-bottom:56px;}
+  .cat-header h2{
+    font-size:13px; letter-spacing:3px; text-transform:uppercase;
+    font-weight:500; color:var(--rosa-suave);
+    margin-bottom:14px;
+  }
+  .cat-header p{font-size:15px; color:var(--texto-secundario); font-weight:300;}
+  .cat-header .linea{width:40px; height:1px; background:var(--rosa); margin:18px auto 0;}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:32px 24px;
+  }
+  .card{cursor:pointer;}
+  .card .foto{
+    width:100%; aspect-ratio:4/5; overflow:hidden;
+    background:var(--nude);
+    margin-bottom:14px;
+  }
+  .card .foto img{
+    width:100%; height:100%; object-fit:cover;
+    transition:transform .6s ease, opacity .6s ease;
+    opacity:0;
+  }
+  .card .foto img.cargada{opacity:1;}
+  .card:hover .foto img{transform:scale(1.035);}
+  .card .info{text-align:center;}
+  .card .info h3{
+    font-size:14px; font-weight:400; letter-spacing:0.3px;
+    margin-bottom:6px; color:var(--texto);
+  }
+  .card .info h3 .cod{
+    font-size:11px; color:var(--texto-secundario); font-weight:300;
+  }
+  .card .info .precio{
+    font-size:14px; font-weight:500; color:var(--rosa);
+    letter-spacing:0.3px;
+  }
+  .card .info .precio.pedido{font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--texto-secundario);}
+
+  .quienes{
+    max-width:var(--maxw); margin:0 auto; padding:90px 24px;
+  }
+  .quienes-wrap{
+    display:flex; align-items:center; gap:64px;
+  }
+  .quienes-foto{
+    flex:0 0 38%; max-width:38%;
+    aspect-ratio:4/5; overflow:hidden;
+  }
+  .quienes-foto img{width:100%; height:100%; object-fit:cover;}
+  .quienes-texto{flex:1; text-align:center;}
+  .quienes h2{
+    font-size:13px; letter-spacing:3px; text-transform:uppercase;
+    font-weight:500; color:var(--rosa-suave); margin-bottom:30px;
+  }
+  .quienes p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:21px; font-weight:400; line-height:1.75;
+    color:var(--texto); margin-bottom:20px;
+  }
+
+  footer{
+    background:var(--marron-rosado);
+    color:var(--blanco);
+    padding:70px 24px 34px;
+    margin-top:60px;
+  }
+  .footer-wrap{
+    max-width:var(--maxw); margin:0 auto;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:40px;
+    text-align:center;
+  }
+  .footer-wrap h4{
+    font-size:12px; letter-spacing:2px; text-transform:uppercase;
+    font-weight:500; margin-bottom:16px; opacity:0.85;
+  }
+  .footer-wrap p, .footer-wrap a{font-size:14px; font-weight:300; opacity:0.95; line-height:1.9;}
+  .footer-wrap a:hover{opacity:1; text-decoration:underline;}
+  .copy{
+    text-align:center; font-size:11px; letter-spacing:1px;
+    opacity:0.6; margin-top:56px;
+  }
+
+  .lightbox{
+    position:fixed; inset:0; z-index:1000;
+    background:rgba(30,22,20,0.92);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; visibility:hidden;
+    transition:opacity .35s ease;
+    padding:40px;
+  }
+  .lightbox.activo{opacity:1; visibility:visible;}
+  .lb-contenido{
+    display:flex; gap:40px; max-width:1000px; width:100%;
+    max-height:88vh;
+    align-items:center;
+    transform:scale(0.96); transition:transform .35s ease;
+  }
+  .lightbox.activo .lb-contenido{transform:scale(1);}
+  .lb-imagen{flex:1 1 55%; max-height:88vh; display:flex; align-items:center; justify-content:center;}
+  .lb-imagen img{max-height:88vh; max-width:100%; object-fit:contain; pointer-events:none;}
+  .lb-info{flex:1 1 40%; color:var(--blanco); max-width:340px; max-height:80vh; overflow-y:auto;}
+  .lb-info h3{font-family:'Cormorant Garamond', serif; font-size:26px; font-weight:400; margin-bottom:14px;}
+  .lb-info .lb-precio{font-size:18px; color:var(--rosa-suave); margin-bottom:18px; font-weight:500;}
+  .lb-info p.lb-desc{font-size:14px; font-weight:300; opacity:0.9; margin-bottom:20px; line-height:1.7;}
+  .lb-info .stock-titulo{font-size:12px; letter-spacing:1.5px; text-transform:uppercase; opacity:0.7; margin-bottom:10px;}
+  .lb-info .variante{
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    font-size:13px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.15);
+    flex-wrap:wrap;
+  }
+  .lb-info .variante b{font-weight:500;}
+  .lb-info .variante .frase-stock{color:var(--rosa-suave); font-weight:500; margin-right:auto; margin-left:10px;}
+  .lb-info .btn-comprar{
+    background:var(--rosa); color:var(--blanco);
+    font-size:11px; letter-spacing:1px; text-transform:uppercase;
+    padding:7px 14px; border-radius:2px; white-space:nowrap;
+    transition:background .25s ease;
+  }
+  .lb-info .btn-comprar:hover{background:var(--rosa-suave); color:var(--marron-rosado);}
+
+  .lb-cerrar{
+    position:absolute; top:28px; right:34px;
+    font-size:32px; color:var(--blanco); cursor:pointer;
+    background:none; border:none; line-height:1; opacity:0.85;
+  }
+  .lb-cerrar:hover{opacity:1;}
+  .lb-flecha{
+    position:absolute; top:50%; transform:translateY(-50%);
+    background:none; border:none; color:var(--blanco);
+    font-size:34px; cursor:pointer; opacity:0.7; padding:14px 18px;
+    z-index:10; pointer-events:auto;
+  }
+  .lb-flecha:hover{opacity:1;}
+  .lb-prev{left:14px;}
+  .lb-next{right:14px;}
+
+  @media (max-width:1024px){
+    .grid{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (max-width:768px){
+    .nav-wrap{padding:10px 16px;}
+    .brand img{height:38px; width:38px;}
+    .buscador-wrap{padding:0 18px; margin-bottom:36px;}
+    .buscador input{font-size:16px;}
+    .hero{padding:130px 18px 50px;}
+    .hero .portada-img{max-width:260px; width:78%;}
+    .hero h1{font-size:20px; margin:14px 0 12px;}
+    .hero p{font-size:14.5px;}
+    .accesos{grid-template-columns:1fr; gap:14px; padding:0 18px 60px;}
+    .acceso{aspect-ratio:4/5;}
+    .acceso-label{font-size:16px; letter-spacing:1.8px;}
+    nav.menu{
+      position:fixed; top:0; left:0; right:0; bottom:0;
+      z-index:99;
+      background:var(--fondo);
+      flex-direction:column; align-items:center; justify-content:center;
+      gap:30px;
+      transform:translateX(100%); transition:transform .35s ease;
+      visibility:hidden;
+    }
+    nav.menu.abierto{transform:translateX(0); visibility:visible;}
+    nav.menu a{font-size:14px; padding:10px 0;}
+    .menu-toggle{display:block;}
+    .grid{grid-template-columns:repeat(2,1fr); gap:20px 12px;}
+    .card .info h3{font-size:12.5px;}
+    .card .info h3 .cod{font-size:10px;}
+    .card .info .precio{font-size:13px;}
+    section.categoria{padding:50px 18px 20px;}
+    .cat-header p{font-size:13.5px; padding:0 10px;}
+    .footer-wrap{grid-template-columns:1fr; gap:34px;}
+    .quienes{padding:60px 20px;}
+    .quienes-wrap{flex-direction:column; gap:28px;}
+    .quienes-foto{flex:0 0 auto; max-width:75%; margin:0 auto;}
+    .quienes-texto{text-align:center;}
+    .quienes p{font-size:17px;}
+    .lightbox{padding:0;}
+    .lb-contenido{flex-direction:column; max-height:100vh; gap:0; max-width:100%;}
+    .lb-imagen{max-height:42vh; width:100%;}
+    .lb-imagen img{max-height:42vh;}
+    .lb-info{max-width:100%; padding:18px 22px 26px; text-align:center; max-height:48vh;}
+    .lb-info h3{font-size:20px;}
+    .lb-info .variante{justify-content:center; text-align:left;}
+    .lb-info .frase-stock{margin-left:0;}
+    .lb-info .btn-comprar{flex:0 0 100%; text-align:center; margin-top:6px;}
+    .lb-flecha{top:21vh; font-size:30px; padding:12px 14px;}
+    .lb-prev{left:8px;}
+    .lb-next{right:8px;}
+    .lb-cerrar{top:14px; right:14px; font-size:28px;}
+  }
+  @media (max-width:380px){
+    .grid{grid-template-columns:1fr 1fr; gap:16px 10px;}
+    .hero .portada-img{max-width:220px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="#inicio" class="brand">
+      <img src="img/logo-milune.png" alt="Milune Intimates" loading="lazy">
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">&#9776;</button>
+    <nav class="menu" id="menuNav">
+      <a href="#comodos">Conjuntos Supercómodos</a>
+      <a href="#encaje">Lencería de Puntilla y Encaje</a>
+      <a href="#bombachas">Bombachas, Culotes, Medias y Corpiños</a>
+      <a href="#quienes-somos">Quiénes somos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<div id="inicio" class="hero">
+  <img class="portada-img" src="img/portada-inicio.png" alt="Milune Intimates" loading="lazy">
+  <h1>Nunca son solo conjuntos</h1>
+  <p>Diseño, comodidad y calidad a precios accesibles. Conocé nuestra colección y elegí el modelo pensado para vos.</p>
+</div>
+
+<div class="buscador-wrap">
+  <div class="buscador">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <input type="text" id="buscadorInput" placeholder="Buscá por nombre o código...">
+  </div>
+</div>
+
+<div class="accesos">
+  <a href="#comodos" class="acceso">
+    <div class="acceso-foto"><img src="img/categoria-comodos.png" alt="Conjuntos Supercómodos" loading="lazy"></div>
+    <span class="acceso-label">Conjuntos Supercómodos</span>
+  </a>
+  <a href="#encaje" class="acceso">
+    <div class="acceso-foto"><img src="img/categoria-encaje.png" alt="Lencería de Puntilla y Encaje" loading="lazy"></div>
+    <span class="acceso-label">Lencería de Puntilla y Encaje</span>
+  </a>
+  <a href="#bombachas" class="acceso">
+    <div class="acceso-foto"><img src="img/categoria-bombachas.png" alt="Bombachas, Culotes, Medias y Corpiños" loading="lazy"></div>
+    <span class="acceso-label">Bombachas, Culotes, Medias y Corpiños</span>
+  </a>
+</div>
+
+<section class="categoria" id="comodos">
+  <div class="cat-header">
+    <h2>Conjuntos Supercómodos</h2>
+    <p>Algodón, morley y microfibra para el día a día. Comodidad que no resigna diseño.</p>
+    <div class="linea"></div>
+  </div>
+  <div class="grid" id="grid-comodos"></div>
+  <p class="sin-resultados" id="sinResultadosComodos">No encontramos productos con esa búsqueda.</p>
+</section>
+
+<section class="categoria" id="encaje">
+  <div class="cat-header">
+    <h2>Lencería de Puntilla y Encaje</h2>
+    <p>Puntilla, encaje y detalles delicados para sentirte linda en cada ocasión.</p>
+    <div class="linea"></div>
+  </div>
+  <div class="grid" id="grid-encaje"></div>
+  <p class="sin-resultados" id="sinResultadosEncaje">No encontramos productos con esa búsqueda.</p>
+</section>
+
+<section class="categoria" id="bombachas">
+  <div class="cat-header">
+    <h2>Bombachas, Culotes, Medias y Corpiños</h2>
+    <p>Para completar tu día a día: bombachas, culotes y medias cómodas, a tu medida.</p>
+    <div class="linea"></div>
+  </div>
+  <div class="grid" id="grid-bombachas"></div>
+  <p class="sin-resultados" id="sinResultadosBombachas">No encontramos productos con esa búsqueda.</p>
+</section>
+
+<section class="quienes" id="quienes-somos">
+  <div class="quienes-wrap">
+    <div class="quienes-foto">
+      <img src="img/quienes-somos-mariana-macarena.jpg" alt="Mariana y Macarena, fundadoras de Milune Intimates" loading="lazy">
+    </div>
+    <div class="quienes-texto">
+      <h2>Quiénes somos</h2>
+      <p>Milune Intimates nació de nuestra amistad (Mariana y Macarena). Nos conocimos trabajando en educación, y entre el día a día armamos un buen equipo y, sin darnos cuenta, también una linda amistad. Entre charlas y sueños compartidos surgió la idea de emprender juntas, y en unas vacaciones de invierno dimos el primer paso.</p>
+      <p>Así nació Milune: un espacio pensado para ofrecer lencería hermosa, de buena calidad, a precios accesibles. Te acompañamos desde el primer mensaje, asesorándote en talles y modelos, para que elegir tu próximo conjunto sea simple, cálido y de confianza. Porque para nosotras, nunca son solo conjuntos.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="footer-wrap">
+    <div>
+      <h4>Instagram</h4>
+      <p><a href="https://www.instagram.com/milune.intimates/" target="_blank" rel="noopener">@milune.intimates</a></p>
+    </div>
+    <div>
+      <h4>WhatsApp</h4>
+      <p><a href="https://wa.me/5492364457857" target="_blank" rel="noopener">Mariana</a></p>
+      <p><a href="https://wa.me/5492352550414" target="_blank" rel="noopener">Macarena</a></p>
+    </div>
+    <div>
+      <h4>Dónde estamos</h4>
+      <p>Chacabuco, Buenos Aires</p>
+      <p>Hacemos envíos a domicilio los viernes</p>
+    </div>
+  </div>
+  <div class="copy">Milune Intimates</div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-cerrar" id="lbCerrar" aria-label="Cerrar">&times;</button>
+  <button class="lb-flecha lb-prev" id="lbPrev" aria-label="Anterior">&#8249;</button>
+  <div class="lb-contenido">
+    <div class="lb-imagen"><img id="lbImg" src="" alt=""></div>
+    <div class="lb-info">
+      <h3 id="lbNombre"></h3>
+      <div class="lb-precio" id="lbPrecio"></div>
+      <p class="lb-desc" id="lbDesc"></p>
+      <div id="lbVariantes"></div>
+    </div>
+  </div>
+  <button class="lb-flecha lb-next" id="lbNext" aria-label="Siguiente">&#8250;</button>
+</div>
+
+<script>
+const productos = [{"cod": 8244, "categoria": "encaje", "nombre": "Conjunto de puntilla y tul personalizado", "descripcion": "Conjunto desarmado de tul con encaje y culotte less", "precio": 25000, "a_pedido": false, "variantes": [{"talle": "90", "color": "fresa", "stock": 1}, {"talle": "100", "color": "negro", "stock": 1}], "imagenes": ["encaje-8244.png"]}, {"cod": 8234, "categoria": "encaje", "nombre": "Conjunto de puntilla y breteles con strass", "descripcion": "Corpiño taza soft con push up y cola less regulable.", "precio": 31000, "a_pedido": false, "variantes": [{"talle": "85", "color": "bordó", "stock": 1}], "imagenes": ["encaje-8234.png"]}, {"cod": 8227, "categoria": "encaje", "nombre": "Conjunto de puntilla", "descripcion": "Corpiño triangulito y semi less.", "precio": 20700, "a_pedido": false, "variantes": [{"talle": "90", "color": "bordó", "stock": 1}, {"talle": "95", "color": "nude", "stock": 1}, {"talle": "95", "color": "blanco", "stock": 1}], "imagenes": ["encaje-8227.png"]}, {"cod": 8208, "categoria": "encaje", "nombre": "Conjunto de tul y puntilla", "descripcion": "Corpiño con arco y cola less regulable.", "precio": 22200, "a_pedido": false, "variantes": [{"talle": "110", "color": "negro", "stock": 1}], "imagenes": ["encaje-8208.png"]}, {"cod": 8226, "categoria": "encaje", "nombre": "Conjunto de puntilla", "descripcion": "Corpiño triangulito con breteles en escote y cola less regulable.", "precio": 23000, "a_pedido": false, "variantes": [{"talle": "85", "color": "blanco", "stock": 1}, {"talle": "95", "color": "verde militar", "stock": 1}, {"talle": "95", "color": "blanco", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["encaje-8226.png"]}, {"cod": 7020, "categoria": "comodos", "nombre": "Conjunto de puntilla y microfibra", "descripcion": "Corpiño triangulito y cola less.", "precio": 22000, "a_pedido": false, "variantes": [{"talle": "90", "color": "rosa vintage", "stock": 1}, {"talle": "95", "color": "verde militar", "stock": 1}, {"talle": "95", "color": "blanco", "stock": 1}, {"talle": "100", "color": "verde militar", "stock": 1}, {"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-7020.png"]}, {"cod": 1011, "categoria": "encaje", "nombre": "Conjunto de puntilla. Corpiño triangulito y cola less.", "descripcion": "", "precio": 14400, "a_pedido": false, "variantes": [{"talle": "95", "color": "blanco", "stock": 1}, {"talle": "100", "color": "negro", "stock": 1}], "imagenes": ["encaje-1011.png"]}, {"cod": 6000, "categoria": "encaje", "nombre": "Conjunto de tul. Corpiño triangulito y cola less regulable.", "descripcion": "", "precio": 11300, "a_pedido": false, "variantes": [{"talle": "90", "color": "rojo", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}, {"talle": "100", "color": "negro", "stock": 1}], "imagenes": ["encaje-6000.png"]}, {"cod": 1004, "categoria": "encaje", "nombre": "Conjunto de encaje. Corpiño triangulito y cola less.", "descripcion": "", "precio": 12000, "a_pedido": false, "variantes": [{"talle": "85", "color": "rosa vintage", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["encaje-1004-1.png", "encaje-1004-2.png"]}, {"cod": 8209, "categoria": "encaje", "nombre": "Conjunto de encaje.", "descripcion": "Tricot y puntilla que incluye un corpiño con arco y una vedetina a juego", "precio": 24000, "a_pedido": false, "variantes": [{"talle": "100", "color": "fresa", "stock": 1}], "imagenes": ["encaje-8209.png"]}, {"cod": 1921, "categoria": "encaje", "nombre": "Conjunto de encaje.", "descripcion": "Sigry. Cuenta con un corpiño con arco y un delicado dije de perla, acompañado por una bombacha estilo colaless", "precio": 22700, "a_pedido": false, "variantes": [{"talle": "110", "color": "celeste", "stock": 1}], "imagenes": ["encaje-1921.png"]}, {"cod": 8100, "categoria": "comodos", "nombre": "Conjunto de microfibra y elástico personalizado", "descripcion": "Corpiño top triangulito de tela doble y cola less.", "precio": 21200, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}, {"talle": "90", "color": "verde", "stock": 1}, {"talle": "95", "color": "verde militar", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-8100.png"]}, {"cod": 8193, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Corpiño premoldeado de tela doble con arco y cola less regulable.", "precio": 22400, "a_pedido": false, "variantes": [{"talle": "85", "color": "rosa vintage", "stock": 2}], "imagenes": ["comodos-8193.png"]}, {"cod": 8192, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Corpiño premoldeado de tela doble y cola less.", "precio": 21200, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-8192.png"]}, {"cod": 8216, "categoria": "comodos", "nombre": "Conjunto de microfibra y elástico personalizado", "descripcion": "Corpiño triangulito y cola less.", "precio": 20000, "a_pedido": false, "variantes": [{"talle": "90", "color": "blanco", "stock": 2}, {"talle": "95", "color": "negro", "stock": 1}, {"talle": "100", "color": "blanco", "stock": 1}], "imagenes": ["comodos-8216.png"]}, {"cod": 8218, "categoria": "comodos", "nombre": "Conjunto de tricot", "descripcion": "Corpiño triangulito y cola less regulable.", "precio": 18400, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8218.png"]}, {"cod": 2013, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Conjunto de microfibra. Corpiño top con cierre delantero y cola less tiro alto.", "precio": 14800, "a_pedido": false, "variantes": [{"talle": "95", "color": "verde militar", "stock": 1}], "imagenes": ["comodos-2013.png"]}, {"cod": 6008, "categoria": "comodos", "nombre": "Conjunto de Morley", "descripcion": "Strapless con cola less de Morley", "precio": 14700, "a_pedido": false, "variantes": [{"talle": "95", "color": "gris", "stock": 1}], "imagenes": ["comodos-6008-1.png", "comodos-6008-2.png"]}, {"cod": 8215, "categoria": "comodos", "nombre": "Conjunto de morley", "descripcion": "Corpiño top de doble tela y cola less.", "precio": 21000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}, {"talle": "95", "color": "vison", "stock": 1}], "imagenes": ["comodos-8215.png"]}, {"cod": 8190, "categoria": "comodos", "nombre": "Conjunto de morley y elástico personalizado", "descripcion": "Corpiño triangulito y cola less.", "precio": 22600, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8190.png"]}, {"cod": 6005, "categoria": "comodos", "nombre": "Conjunto de morley y cola less", "descripcion": "", "precio": 18000, "a_pedido": false, "variantes": [{"talle": "talle 2", "color": "rosa vintage", "stock": 1}], "imagenes": ["comodos-6005.png"]}, {"cod": 3010, "categoria": "comodos", "nombre": "Conjunto de algodón con elástico personalizado", "descripcion": "Conjunto de algodón con elástico personalizado. Corpiño triangulito y cola less.", "precio": 16000, "a_pedido": false, "variantes": [{"talle": "90", "color": "nude", "stock": 1}, {"talle": "95", "color": "gris", "stock": 1}, {"talle": "90", "color": "gris", "stock": 1}], "imagenes": ["comodos-3010.png"]}, {"cod": 3013, "categoria": "comodos", "nombre": "Conjunto de algodón", "descripcion": "Conjunto de algodón. Corpiño triangulito con taza soft sin push up y cola less.", "precio": 19800, "a_pedido": false, "variantes": [{"talle": "90", "color": "gris", "stock": 1}], "imagenes": ["comodos-3013.png"]}, {"cod": 6129, "categoria": "bombachas", "nombre": "Corpiño reductor", "descripcion": "Corpiño Reductor Power Encaje", "precio": 20000, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["bombachas-6129.png"]}, {"cod": 5333, "categoria": "comodos", "nombre": "Conjunto con top dealgodón con elástico personalizado", "descripcion": "Conjunto con top dealgodón con elástico personalizado", "precio": 17000, "a_pedido": false, "variantes": [{"talle": "85", "color": "blanco", "stock": 1}], "imagenes": ["comodos-5333.png"]}, {"cod": 206, "categoria": "comodos", "nombre": "Trenda 206", "descripcion": "Corpiño halter modelador y less doble cintura algodón", "precio": 19700, "a_pedido": false, "variantes": [{"talle": "105", "color": "negro", "stock": 1}, {"talle": "110", "color": "blanco", "stock": 1}], "imagenes": ["comodos-206-1.png", "comodos-206-2.png"]}, {"cod": 5820, "categoria": "comodos", "nombre": "Sigry 5820", "descripcion": "Conjunto de morley. Corpiño push up soft con dije personalizado", "precio": 23000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-5820.png"]}, {"cod": 605, "categoria": "comodos", "nombre": "Annais 605", "descripcion": "Conjunto de morley", "precio": 19000, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-605.png"]}, {"cod": 4385, "categoria": "comodos", "nombre": "Conjunto Lara Teens", "descripcion": "Conjunto de microfibra y la puntilla de textura suave y atractiva.\nEl corpiño con push up y la bombacha colaless aseguran un ajuste cómodo y favorecedor.", "precio": 21000, "a_pedido": false, "variantes": [{"talle": "95", "color": "blanco", "stock": 2}, {"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-4385.png"]}, {"cod": 537, "categoria": "comodos", "nombre": "Conjunto de algodón Frashe 537", "descripcion": "Conjunto en algodón y lycra, e incluye un corpiño con taza soft y base, acompañado de una vedetina a juego", "precio": null, "a_pedido": true, "variantes": [], "imagenes": ["comodos-537.png"]}, {"cod": 8102, "categoria": "comodos", "nombre": "Conjunto de algodón y puntilla.", "descripcion": "Corpiño taza soft con push up y cola less.", "precio": 23000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8102.png"]}, {"cod": 8175, "categoria": "comodos", "nombre": "Conjunto de algodón y puntilla", "descripcion": "Corpiño taza soft con push up y cola less.", "precio": 25000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8175.png"]}, {"cod": 4790, "categoria": "comodos", "nombre": "Conjunto de microfibra y puntilla", "descripcion": "Corpiño taza soft con push up y cola less.", "precio": 27000, "a_pedido": false, "variantes": [{"talle": "90", "color": "blanco", "stock": 1}], "imagenes": ["comodos-4790.png"]}, {"cod": 8214, "categoria": "comodos", "nombre": "Conjunto de morley", "descripcion": "Corpiño taza soft con push up y cola less regulable.", "precio": 27000, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-8214.png"]}, {"cod": 8060, "categoria": "comodos", "nombre": "Conjunto de algodón y puntilla", "descripcion": "Corpiño taza soft con push up y vedetina.", "precio": 25000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8060.png"]}, {"cod": 6001, "categoria": "comodos", "nombre": "Conjunto de algodón", "descripcion": "Conjunto de algodón estampado mini corazones. Corpiño triangulito y cola less.", "precio": 12800, "a_pedido": false, "variantes": [{"talle": "90", "color": "morado", "stock": 1}, {"talle": "95", "color": "morado", "stock": 1}], "imagenes": ["comodos-6001.png"]}, {"cod": 3025, "categoria": "comodos", "nombre": "Conjunto de algodon", "descripcion": "conjunto de algodon y puntilla con cola less. Top y less con puntilla.", "precio": 15000, "a_pedido": false, "variantes": [{"talle": "talle 4", "color": "negro", "stock": 1}], "imagenes": ["comodos-3025.png"]}, {"cod": 1001, "categoria": "encaje", "nombre": "Lencería de encaje", "descripcion": "Conjunto de puntilla. Corpiño triangulito y cola less regulable.", "precio": 13000, "a_pedido": false, "variantes": [{"talle": "90", "color": "rosa vintage", "stock": 1}, {"talle": "90", "color": "negro", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["encaje-1001.png"]}, {"cod": 3009, "categoria": "comodos", "nombre": "Conjunto de algodón", "descripcion": "Conjunto taza soft de algodon con vedetina", "precio": 19600, "a_pedido": false, "variantes": [{"talle": "90", "color": "blanco", "stock": 1}], "imagenes": ["comodos-3009.png"]}, {"cod": 1007, "categoria": "encaje", "nombre": "Conjunto de encaje", "descripcion": "Conjunto de encaje. Corpiño taza soft con push up y cola less.", "precio": 21200, "a_pedido": false, "variantes": [{"talle": "95", "color": "rosa vintage", "stock": 1}], "imagenes": ["encaje-1007.png"]}, {"cod": 1003, "categoria": "encaje", "nombre": "Conjunto de encaje", "descripcion": "Conjunto de puntilla. Corpiño triangulito taza soft sin push up y cola less.", "precio": 18000, "a_pedido": false, "variantes": [{"talle": "85", "color": "rosa vintage", "stock": 1}, {"talle": "90", "color": "rosa vintage", "stock": 1}, {"talle": "100", "color": "uva", "stock": 1}], "imagenes": ["encaje-1003.png"]}, {"cod": 2016, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Conjunto de microfibra, corpiño top con breteles de elástico personalizado, y cola less.", "precio": 15300, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-2016.png"]}, {"cod": 4000, "categoria": "comodos", "nombre": "Conjunto de microfibra y puntilla", "descripcion": "Conjunto de microfibra y puntilla. Corpiño taza soft con push up y cola less.", "precio": 27500, "a_pedido": false, "variantes": [{"talle": "85", "color": "amarillo", "stock": 1}], "imagenes": ["comodos-4000.png"]}, {"cod": 5006, "categoria": "comodos", "nombre": "Conjunto top de morley", "descripcion": "Conjunto top de morley con cola less regulable", "precio": 11200, "a_pedido": false, "variantes": [{"talle": "90", "color": "gris humo", "stock": 1}, {"talle": "95", "color": "gris humo", "stock": 1}], "imagenes": ["comodos-5006.png"]}, {"cod": 5005, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Conjunto top de microfibra con cola less", "precio": 9600, "a_pedido": false, "variantes": [{"talle": "95", "color": "verde", "stock": 1}, {"talle": "100", "color": "verde", "stock": 1}], "imagenes": ["comodos-5005.png"]}, {"cod": 8240, "categoria": "comodos", "nombre": "Conjunto taza soft de morley", "descripcion": "Conjunto taza soft de morley sin costura y cola less tiro alto", "precio": 27000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8240.png"]}, {"cod": 8186, "categoria": "comodos", "nombre": "Conjunto de algodón y elástico personalizado", "descripcion": "Conjunto de algodón y elástico personalizado. Corpiño triangulito taza soft sin push up y cola less.", "precio": 24000, "a_pedido": false, "variantes": [{"talle": "85", "color": "amarillo", "stock": 1}], "imagenes": ["comodos-8186.png"]}, {"cod": 2011, "categoria": "comodos", "nombre": "Conjunto de microfibra con elástico personalizado", "descripcion": "Conjunto de microfibra con elástico personalizado. Corpiño triangulito taza soft sin push up y cola less.", "precio": 20000, "a_pedido": false, "variantes": [{"talle": "85", "color": "lima", "stock": 1}], "imagenes": ["comodos-2011.png"]}, {"cod": "P97", "categoria": "bombachas", "nombre": "Soquetes mujer", "descripcion": "Soquetes de algodón", "precio": 2800, "a_pedido": false, "variantes": [{"talle": "Único", "color": "negro", "stock": 12}, {"talle": "Único", "color": "gris", "stock": 12}], "imagenes": ["bombachas-P97.png"]}, {"cod": "K29", "categoria": "bombachas", "nombre": "Medias media caña", "descripcion": "Pares de medias media caña", "precio": 2100, "a_pedido": false, "variantes": [{"talle": null, "color": "negro", "stock": 6}, {"talle": null, "color": "gris", "stock": 6}], "imagenes": ["bombachas-K29.png"]}, {"cod": 111, "categoria": "bombachas", "nombre": "Culotte less", "descripcion": "Culotte less de algodon", "precio": 2600, "a_pedido": false, "variantes": [{"talle": null, "color": null, "stock": 12}], "imagenes": ["bombachas-111.png"]}, {"cod": 112, "categoria": "bombachas", "nombre": "Cola less", "descripcion": "Cola less algodón", "precio": 2600, "a_pedido": false, "variantes": [{"talle": null, "color": null, "stock": 12}], "imagenes": ["bombachas-112.png"]}, {"cod": "P149", "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack de 3 cola less de algodón con tiras", "precio": 16500, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-P149.png"]}, {"cod": "P141BLANCO", "categoria": "bombachas", "nombre": "Cola less pack x 2", "descripcion": "Pack de 2 cola less de encaje", "precio": 10300, "a_pedido": false, "variantes": [{"talle": "Único", "color": "blanco", "stock": 1}], "imagenes": ["bombachas-P141BLANCO.png"]}, {"cod": "P164NEGRO", "categoria": "bombachas", "nombre": "Cola less pack x 2", "descripcion": "Pack de 2 cola less de tul", "precio": 10000, "a_pedido": false, "variantes": [{"talle": "Único", "color": "negro", "stock": 1}], "imagenes": ["bombachas-P164NEGRO.png"]}, {"cod": 303, "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack de 3 cola less tiro alto corte en V de algodon con puntilla", "precio": 13000, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-303.png"]}, {"cod": 301, "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack de 3 cola less de algodon con elastico personalizado", "precio": 14100, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-301.png"]}, {"cod": "P134", "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack de 3 cola less regulable de microfibra", "precio": 16500, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-P134.png"]}, {"cod": "P122", "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack x3 Cola less de algodón liso con estampa.", "precio": 16000, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-P122.png"]}, {"cod": "P127", "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack x3 Cola less algodón y elástico personalizado.", "precio": 14500, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-P127-1.png", "bombachas-P127-2.png"]}, {"cod": 8237, "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack de 3 cola less pegadas/sin costura de microfibra, regulables", "precio": 23000, "a_pedido": false, "variantes": [{"talle": "Único", "color": "blanco", "stock": 1}], "imagenes": ["bombachas-8237.png"]}, {"cod": 8239, "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Bombachas pegadas sin costuras", "precio": 22500, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-8239.png"]}]
+;
+
+const categorias = ["comodos","encaje","bombachas"];
+let slides = [];
+categorias.forEach(cat=>{
+  productos.filter(p=>p.categoria===cat).forEach(p=>{
+    p.imagenes.forEach((img)=>{
+      slides.push({...p, imagen:img});
+    });
+  });
+});
+
+function formatoPrecio(p){
+  if(p===null || p===undefined) return "A pedido";
+  return "$" + p.toLocaleString('es-AR');
+}
+
+function crearTarjeta(p, slideIndex){
+  const div = document.createElement('div');
+  div.className = 'card';
+  const textoBusqueda = [p.nombre, p.cod, p.descripcion, ...(p.variantes||[]).map(v=>v.color), ...(p.variantes||[]).map(v=>v.talle)]
+    .filter(Boolean).join(' ').toLowerCase();
+  div.dataset.search = textoBusqueda;
+  div.innerHTML = `
+    <div class="foto">
+      <img src="img/${p.imagenes[0]}" alt="${p.nombre}" loading="lazy" onload="this.classList.add('cargada')">
+    </div>
+    <div class="info">
+      <h3>${p.nombre} <span class="cod">(COD ${p.cod})</span></h3>
+      <div class="precio ${p.a_pedido ? 'pedido' : ''}">${formatoPrecio(p.precio)}</div>
+    </div>
+  `;
+  div.addEventListener('click', ()=> abrirLightbox(slideIndex));
+  return div;
+}
+
+const gridComodos = document.getElementById('grid-comodos');
+const gridEncaje = document.getElementById('grid-encaje');
+const gridBombachas = document.getElementById('grid-bombachas');
+
+productos.forEach(p=>{
+  const idx = slides.findIndex(s => s.cod === p.cod && s.categoria === p.categoria && s.imagen === p.imagenes[0]);
+  const tarjeta = crearTarjeta(p, idx);
+  if(p.categoria === 'comodos') gridComodos.appendChild(tarjeta);
+  if(p.categoria === 'encaje') gridEncaje.appendChild(tarjeta);
+  if(p.categoria === 'bombachas') gridBombachas.appendChild(tarjeta);
+});
+
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbNombre = document.getElementById('lbNombre');
+const lbPrecio = document.getElementById('lbPrecio');
+const lbDesc = document.getElementById('lbDesc');
+const lbVariantes = document.getElementById('lbVariantes');
+let indiceActual = 0;
+
+const TEL_MARIANA = '5492364457857';
+const TEL_MACARENA = '5492352550414';
+
+function fraseStock(stock){
+  if(stock === null || stock === undefined) return '';
+  if(stock === 1) return '¡Queda el último!';
+  return `${stock} disponibles`;
+}
+
+function detalleVariante(v){
+  const partes = [];
+  if(v.talle) partes.push(`Talle ${v.talle}`);
+  if(v.color) partes.push(v.color);
+  return partes.join(', ');
+}
+
+function linkComprar(s, v){
+  const precioTxt = formatoPrecio(s.precio);
+  const esEncaje = s.categoria === 'encaje';
+  const tel = esEncaje ? TEL_MACARENA : TEL_MARIANA;
+  const nombreDestino = esEncaje ? 'Macarena' : 'Mariana';
+  const detalle = detalleVariante(v);
+  const msg = `Hola ${nombreDestino}! Quiero comprar: ${s.nombre} (COD ${s.cod})${detalle ? ' - ' + detalle : ''}. Precio: ${precioTxt}`;
+  return `https://wa.me/${tel}?text=${encodeURIComponent(msg)}`;
+}
+
+function renderSlide(i){
+  const s = slides[i];
+  lbImg.src = 'img/' + s.imagen;
+  lbImg.alt = s.nombre;
+  lbNombre.textContent = `${s.nombre} (COD ${s.cod})`;
+  lbPrecio.textContent = formatoPrecio(s.precio);
+  lbDesc.textContent = s.descripcion || '';
+
+  if(s.a_pedido || !s.variantes || !s.variantes.length){
+    lbVariantes.innerHTML = '';
+  } else {
+    let html = '<div class="stock-titulo">Talles y colores disponibles</div>';
+    s.variantes.forEach(v=>{
+      const disponible = v.stock !== null && v.stock !== undefined && v.stock > 0;
+      const boton = disponible ? `<a class="btn-comprar" href="${linkComprar(s, v)}" target="_blank" rel="noopener">Comprar</a>` : '';
+      const partesEtiqueta = [];
+      if(v.talle) partesEtiqueta.push(`Talle <b>${v.talle}</b>`);
+      if(v.color) partesEtiqueta.push(v.color);
+      const etiqueta = partesEtiqueta.length ? partesEtiqueta.join(' · ') : 'Producto único';
+      html += `<div class="variante"><span>${etiqueta}</span><span class="frase-stock">${fraseStock(v.stock)}</span>${boton}</div>`;
+    });
+    lbVariantes.innerHTML = html;
+  }
+}
+
+function abrirLightbox(i){
+  indiceActual = i;
+  renderSlide(indiceActual);
+  lightbox.classList.add('activo');
+  document.body.style.overflow = 'hidden';
+}
+function cerrarLightbox(){
+  lightbox.classList.remove('activo');
+  document.body.style.overflow = '';
+}
+function siguiente(){
+  indiceActual = (indiceActual + 1) % slides.length;
+  renderSlide(indiceActual);
+}
+function anterior(){
+  indiceActual = (indiceActual - 1 + slides.length) % slides.length;
+  renderSlide(indiceActual);
+}
+
+document.getElementById('lbCerrar').addEventListener('click', cerrarLightbox);
+document.getElementById('lbNext').addEventListener('click', siguiente);
+document.getElementById('lbPrev').addEventListener('click', anterior);
+lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) cerrarLightbox(); });
+document.addEventListener('keydown', (e)=>{
+  if(!lightbox.classList.contains('activo')) return;
+  if(e.key === 'Escape') cerrarLightbox();
+  if(e.key === 'ArrowRight') siguiente();
+  if(e.key === 'ArrowLeft') anterior();
+});
+
+const menuToggle = document.getElementById('menuToggle');
+const menuNav = document.getElementById('menuNav');
+menuToggle.addEventListener('click', ()=> menuNav.classList.toggle('abierto'));
+menuNav.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> menuNav.classList.remove('abierto')));
+
+// BUSCADOR
+const buscadorInput = document.getElementById('buscadorInput');
+const sinResultadosComodos = document.getElementById('sinResultadosComodos');
+const sinResultadosEncaje = document.getElementById('sinResultadosEncaje');
+const sinResultadosBombachas = document.getElementById('sinResultadosBombachas');
+
+function filtrarProductos(){
+  const q = buscadorInput.value.trim().toLowerCase();
+  [{grid:gridComodos, aviso:sinResultadosComodos},{grid:gridEncaje, aviso:sinResultadosEncaje},{grid:gridBombachas, aviso:sinResultadosBombachas}].forEach(({grid,aviso})=>{
+    let visibles = 0;
+    grid.querySelectorAll('.card').forEach(card=>{
+      const coincide = !q || card.dataset.search.includes(q);
+      card.style.display = coincide ? '' : 'none';
+      if(coincide) visibles++;
+    });
+    aviso.style.display = visibles === 0 ? 'block' : 'none';
+  });
+}
+buscadorInput.addEventListener('input', filtrarProductos);
+</script>
+</body>
+</html>
