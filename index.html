@@ -252,14 +252,26 @@
   .lb-info .variante .frase-stock{color:var(--rosa-suave); font-weight:500; margin-right:auto; margin-left:10px;}
   .lb-info .btn-comprar{
     background:var(--rosa); color:var(--blanco);
-    font-size:11px; letter-spacing:1px; text-transform:uppercase;
-    padding:7px 14px; border-radius:2px; white-space:nowrap;
-    transition:background .25s ease;
+    font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;
+    padding:10px 20px; border-radius:3px; white-space:nowrap;
+    box-shadow:0 4px 14px rgba(175,137,149,0.45);
+    transition:background .25s ease, transform .2s ease, box-shadow .25s ease;
   }
-  .lb-info .btn-comprar:hover{background:var(--rosa-suave); color:var(--marron-rosado);}
+  .lb-info .btn-comprar:hover{
+    background:var(--marron-rosado); color:var(--blanco);
+    transform:translateY(-1px);
+    box-shadow:0 6px 18px rgba(175,137,149,0.6);
+  }
   .lb-info .sin-stock{margin-top:6px;}
   .lb-info .sin-stock-msg{font-size:14px; font-weight:300; opacity:0.9; line-height:1.6; margin-bottom:16px;}
-  .lb-info .btn-encargar{display:inline-block; padding:10px 24px; font-size:12px;}
+  .lb-info .btn-encargar{
+    display:inline-block; background:transparent; color:var(--rosa-suave);
+    border:1px solid var(--rosa-suave);
+    font-size:12px; font-weight:400; letter-spacing:1px; text-transform:uppercase;
+    padding:9px 22px; border-radius:3px; white-space:nowrap;
+    transition:background .25s ease, color .25s ease;
+  }
+  .lb-info .btn-encargar:hover{background:var(--rosa-suave); color:var(--marron-rosado);}
 
   .lb-cerrar{
     position:absolute; top:28px; right:34px;
@@ -325,6 +337,7 @@
     .lb-info .variante{justify-content:center; text-align:left;}
     .lb-info .frase-stock{margin-left:0;}
     .lb-info .btn-comprar{flex:0 0 100%; text-align:center; margin-top:6px;}
+    .lb-info .btn-encargar{display:block; width:100%; text-align:center;}
     .lb-flecha{top:21vh; font-size:30px; padding:12px 14px;}
     .lb-prev{left:8px;}
     .lb-next{right:8px;}
@@ -491,7 +504,7 @@ function crearTarjeta(p, slideIndex){
     </div>
     <div class="info">
       <h3>${p.nombre} <span class="cod">(COD ${p.cod})</span></h3>
-      <div class="precio ${p.a_pedido ? 'pedido' : ''}">${formatoPrecio(p.precio)}</div>
+      ${(p.precio !== null && p.precio !== undefined) ? `<div class="precio ${p.a_pedido ? 'pedido' : ''}">${formatoPrecio(p.precio)}</div>` : ''}
     </div>
   `;
   div.addEventListener('click', ()=> abrirLightbox(slideIndex));
@@ -559,12 +572,12 @@ function renderSlide(i){
   lbImg.src = 'img/' + s.imagen;
   lbImg.alt = s.nombre;
   lbNombre.textContent = `${s.nombre} (COD ${s.cod})`;
-  lbPrecio.textContent = formatoPrecio(s.precio);
+  lbPrecio.textContent = (s.precio !== null && s.precio !== undefined) ? formatoPrecio(s.precio) : '';
   lbDesc.textContent = s.descripcion || '';
 
   const sinStockTotal = s.variantes && s.variantes.length && s.variantes.every(v => !(v.stock > 0));
   if(s.a_pedido || !s.variantes || !s.variantes.length || sinStockTotal){
-    lbVariantes.innerHTML = `<div class="sin-stock"><p class="sin-stock-msg">Ya agotamos stock, pero podés encargarlo desde acá</p><a class="btn-comprar btn-encargar" href="${linkEncargar(s)}" target="_blank" rel="noopener">Encargar</a></div>`;
+    lbVariantes.innerHTML = `<div class="sin-stock"><p class="sin-stock-msg">Ya agotamos stock, pero podés encargarlo desde acá</p><a class="btn-encargar" href="${linkEncargar(s)}" target="_blank" rel="noopener">Encargar</a></div>`;
   } else {
     let html = '<div class="stock-titulo">Talles y colores disponibles</div>';
     s.variantes.forEach(v=>{
