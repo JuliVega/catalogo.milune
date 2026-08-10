@@ -577,7 +577,7 @@ function renderSlide(i){
 
   const sinStockTotal = s.variantes && s.variantes.length && s.variantes.every(v => !(v.stock > 0));
   if(s.a_pedido || !s.variantes || !s.variantes.length || sinStockTotal){
-    lbVariantes.innerHTML = `<div class="sin-stock"><p class="sin-stock-msg">Ya agotamos el stock de este conjunto, pero podés encargarlo desde acá</p><a class="btn-encargar" href="${linkEncargar(s)}" target="_blank" rel="noopener">Encargar</a></div>`;
+    lbVariantes.innerHTML = `<div class="sin-stock"><p class="sin-stock-msg">Ya agotamos el stock de este producto, pero podés encargarlo desde acá</p><a class="btn-encargar" href="${linkEncargar(s)}" target="_blank" rel="noopener">Encargar</a></div>`;
   } else {
     let html = '<div class="stock-titulo">Talles y colores disponibles</div>';
     s.variantes.forEach(v=>{
