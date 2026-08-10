@@ -257,6 +257,9 @@
     transition:background .25s ease;
   }
   .lb-info .btn-comprar:hover{background:var(--rosa-suave); color:var(--marron-rosado);}
+  .lb-info .sin-stock{margin-top:6px;}
+  .lb-info .sin-stock-msg{font-size:14px; font-weight:300; opacity:0.9; line-height:1.6; margin-bottom:16px;}
+  .lb-info .btn-encargar{display:inline-block; padding:10px 24px; font-size:12px;}
 
   .lb-cerrar{
     position:absolute; top:28px; right:34px;
@@ -541,6 +544,15 @@ function linkComprar(s, v){
   return `https://wa.me/${tel}?text=${encodeURIComponent(msg)}`;
 }
 
+function linkEncargar(s){
+  const precioTxt = formatoPrecio(s.precio);
+  const esEncaje = s.categoria === 'encaje';
+  const tel = esEncaje ? TEL_MACARENA : TEL_MARIANA;
+  const nombreDestino = esEncaje ? 'Macarena' : 'Mariana';
+  const msg = `Hola ${nombreDestino}! Quiero encargar: ${s.nombre} (COD ${s.cod}). Precio: ${precioTxt}`;
+  return `https://wa.me/${tel}?text=${encodeURIComponent(msg)}`;
+}
+
 function renderSlide(i){
   const s = slides[i];
   history.replaceState(null, '', '?cod=' + encodeURIComponent(s.cod));
@@ -550,8 +562,9 @@ function renderSlide(i){
   lbPrecio.textContent = formatoPrecio(s.precio);
   lbDesc.textContent = s.descripcion || '';
 
-  if(s.a_pedido || !s.variantes || !s.variantes.length){
-    lbVariantes.innerHTML = '';
+  const sinStockTotal = s.variantes && s.variantes.length && s.variantes.every(v => !(v.stock > 0));
+  if(s.a_pedido || !s.variantes || !s.variantes.length || sinStockTotal){
+    lbVariantes.innerHTML = `<div class="sin-stock"><p class="sin-stock-msg">Ya agotamos stock, pero podés encargarlo desde acá</p><a class="btn-comprar btn-encargar" href="${linkEncargar(s)}" target="_blank" rel="noopener">Encargar</a></div>`;
   } else {
     let html = '<div class="stock-titulo">Talles y colores disponibles</div>';
     s.variantes.forEach(v=>{
