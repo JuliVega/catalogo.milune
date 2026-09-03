@@ -657,7 +657,7 @@ function detalleVariante(v){
   return partes.join(', ');
 }
 function linkComprar(s, v){
-  const precioTxt = formatoPrecio(s.precio);
+  const precioTxt = (s.precio !== null && s.precio !== undefined) ? formatoPrecio(precioConDescuento(s.precio)) : formatoPrecio(s.precio);
   const esEncaje = s.categoria === 'encaje';
   const tel = esEncaje ? TEL_MACARENA : TEL_MARIANA;
   const nombreDestino = esEncaje ? 'Macarena' : 'Mariana';
@@ -666,7 +666,7 @@ function linkComprar(s, v){
   return `https://wa.me/${tel}?text=${encodeURIComponent(msg)}`;
 }
 function linkEncargar(s){
-  const precioTxt = formatoPrecio(s.precio);
+  const precioTxt = (s.precio !== null && s.precio !== undefined) ? formatoPrecio(precioConDescuento(s.precio)) : formatoPrecio(s.precio);
   const esEncaje = s.categoria === 'encaje';
   const tel = esEncaje ? TEL_MACARENA : TEL_MARIANA;
   const nombreDestino = esEncaje ? 'Macarena' : 'Mariana';
