@@ -82,62 +82,6 @@
     font-size:16px; font-weight:300; color:var(--texto); opacity:0.85;
     max-width:520px; margin:0 auto;
   }
-  .aniversario{
-    position:relative;
-    margin-top:34px;
-    padding:26px 10px 6px;
-    overflow:hidden;
-  }
-  .aniversario-titulo{
-    position:relative; z-index:2;
-    font-family:'Cormorant Garamond', serif;
-    font-weight:600;
-    font-size:clamp(28px, 5.5vw, 44px);
-    letter-spacing:1px;
-    text-transform:uppercase;
-    color:var(--boton-oscuro);
-  }
-  .aniversario-sub{
-    position:relative; z-index:2;
-    font-size:15px; font-weight:300;
-    color:var(--texto); opacity:0.9;
-    max-width:480px; margin:14px auto 0;
-  }
-  .confetti{
-    position:absolute; inset:0;
-    z-index:1; pointer-events:none;
-  }
-  .confetti span{
-    position:absolute;
-    top:-16px;
-    width:8px; height:14px;
-    opacity:0.9;
-    animation:confetti-fall 3s linear infinite;
-  }
-  .confetti span.redonda{border-radius:50%;}
-  .confetti span:nth-child(1){left:3%; background:var(--boton-oscuro); animation-delay:0s; animation-duration:2.6s;}
-  .confetti span:nth-child(2){left:10%; background:var(--rosa-suave); animation-delay:.4s; animation-duration:3.2s;}
-  .confetti span:nth-child(3){left:17%; background:var(--blanco); animation-delay:.9s; animation-duration:2.9s;}
-  .confetti span:nth-child(4){left:24%; background:var(--marron-rosado); animation-delay:.2s; animation-duration:3.4s;}
-  .confetti span:nth-child(5){left:31%; background:var(--nude); animation-delay:1.1s; animation-duration:2.7s;}
-  .confetti span:nth-child(6){left:38%; background:var(--boton-oscuro); animation-delay:.6s; animation-duration:3.1s;}
-  .confetti span:nth-child(7){left:45%; background:var(--rosa-suave); animation-delay:1.4s; animation-duration:2.8s;}
-  .confetti span:nth-child(8){left:52%; background:var(--blanco); animation-delay:.1s; animation-duration:3.3s;}
-  .confetti span:nth-child(9){left:59%; background:var(--marron-rosado); animation-delay:.8s; animation-duration:2.6s;}
-  .confetti span:nth-child(10){left:66%; background:var(--nude); animation-delay:1.6s; animation-duration:3s;}
-  .confetti span:nth-child(11){left:73%; background:var(--boton-oscuro); animation-delay:.3s; animation-duration:2.9s;}
-  .confetti span:nth-child(12){left:80%; background:var(--rosa-suave); animation-delay:1.2s; animation-duration:3.2s;}
-  .confetti span:nth-child(13){left:87%; background:var(--blanco); animation-delay:.7s; animation-duration:2.7s;}
-  .confetti span:nth-child(14){left:94%; background:var(--marron-rosado); animation-delay:1.5s; animation-duration:3.1s;}
-  .confetti span:nth-child(15){left:97%; background:var(--nude); animation-delay:.5s; animation-duration:2.8s;}
-  .confetti span:nth-child(16){left:55%; background:var(--boton-oscuro); animation-delay:1.8s; animation-duration:3.3s;}
-  @keyframes confetti-fall{
-    0%{ transform:translateY(-16px) rotate(0deg); opacity:1; }
-    100%{ transform:translateY(170px) rotate(340deg); opacity:0; }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .confetti span{animation:none; display:none;}
-  }
   .buscador-wrap{
     max-width:640px; margin:0 auto 50px;
     padding:0 24px;
@@ -211,18 +155,6 @@
     background:var(--nude);
     margin-bottom:14px;
   }
-  .ribbon-aniversario{
-    position:absolute; top:53px; right:-8px;
-    width:145px;
-    transform:rotate(45deg);
-    background:var(--boton-oscuro); color:var(--blanco);
-    font-size:11px; font-weight:700; letter-spacing:0.4px; text-transform:uppercase;
-    text-align:center;
-    padding:5px 0;
-    white-space:nowrap;
-    box-shadow:0 2px 6px rgba(0,0,0,0.25);
-    z-index:2; pointer-events:none;
-  }
   .card .foto img{
     width:100%; height:100%; object-fit:cover;
     transition:transform .6s ease, opacity .6s ease;
@@ -243,13 +175,6 @@
     letter-spacing:0.3px;
   }
   .card .info .precio.pedido{font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--texto-secundario);}
-  .card .info .precio-anterior{
-    font-size:12px; font-weight:400; color:var(--texto-secundario);
-    text-decoration:line-through; margin-right:6px;
-  }
-  .card .info .precio-nuevo{
-    font-size:15px; font-weight:700; color:var(--boton-oscuro);
-  }
   .card .btn-comprar-card{
     display:block; margin:12px auto 0; width:fit-content;
     background:var(--rosa-cta); color:#1a1a1a;
@@ -262,25 +187,6 @@
   .card .btn-comprar-card:hover{
     background:var(--rosa-cta-hover); transform:translateY(-1px);
     box-shadow:0 6px 18px rgba(0,0,0,0.28);
-  }
-  .lb-info .lb-precio .precio-anterior{
-    font-size:14px; font-weight:400; color:rgba(255,255,255,0.55);
-    text-decoration:line-through; margin-right:8px;
-  }
-  .lb-info .lb-precio .precio-nuevo{
-    font-size:19px; font-weight:600; color:var(--rosa-suave);
-  }
-  .ribbon-lightbox{
-    position:absolute; top:69px; right:-12px;
-    width:196px;
-    transform:rotate(45deg);
-    background:var(--boton-oscuro); color:var(--blanco);
-    font-size:15px; font-weight:700; letter-spacing:0.4px; text-transform:uppercase;
-    text-align:center;
-    white-space:nowrap;
-    padding:8px 0;
-    box-shadow:0 2px 6px rgba(0,0,0,0.3);
-    z-index:5; pointer-events:none;
   }
   .quienes{
     max-width:var(--maxw); margin:0 auto; padding:90px 24px;
@@ -403,8 +309,6 @@
     .hero .portada-img{max-width:260px; width:78%;}
     .hero h1{font-size:20px; margin:14px 0 12px;}
     .hero p{font-size:14.5px;}
-    .aniversario{margin-top:22px; padding:18px 6px 0;}
-    .aniversario-sub{font-size:14px;}
     .accesos{grid-template-columns:1fr; gap:14px; padding:0 18px 60px;}
     .acceso{aspect-ratio:4/5;}
     .acceso-label{font-size:16px; letter-spacing:1.8px;}
@@ -424,10 +328,7 @@
     .card .info h3{font-size:12.5px;}
     .card .info h3 .cod{font-size:10px;}
     .card .info .precio{font-size:13px;}
-    .card .info .precio-anterior{font-size:11px;}
-    .card .info .precio-nuevo{font-size:13.5px;}
     .card .btn-comprar-card{font-size:10.5px; padding:8px 20px; margin-top:10px;}
-    .ribbon-aniversario{top:38px; right:-4px; width:100px; font-size:7.5px; padding:3.5px 0;}
     section.categoria{padding:50px 18px 20px;}
     .cat-header p{font-size:13.5px; padding:0 10px;}
     .footer-wrap{grid-template-columns:1fr; gap:34px;}
@@ -446,7 +347,6 @@
     .lb-info .frase-stock{margin-left:0;}
     .lb-info .btn-comprar{flex:0 0 100%; text-align:center; margin-top:6px; display:block; width:100%; padding:12px 20px;}
     .lb-info .btn-encargar{display:block; width:100%; text-align:center;}
-    .ribbon-lightbox{top:53px; right:-8px; width:147px; font-size:11px; padding:6px 0;}
     .lb-flecha{top:21vh; font-size:30px; padding:12px 14px;}
     .lb-prev{left:8px;}
     .lb-next{right:8px;}
@@ -478,13 +378,6 @@
   <img class="portada-img" src="img/portada-inicio.png" alt="Milune Intimates" loading="lazy">
   <h1>Nunca son solo conjuntos</h1>
   <p>Diseño, comodidad y calidad a precios accesibles. Conocé nuestra colección y elegí el modelo pensado para vos.</p>
-  <div class="aniversario">
-    <div class="confetti" aria-hidden="true">
-      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-    </div>
-    <h2 class="aniversario-titulo">Mes de aniversario!</h2>
-    <p class="aniversario-sub">Este mes de septiembre cumplimos un año! y queremos agradecerles a todas regalándoles un 10% OFF en todos nuestros productos.</p>
-  </div>
 </div>
 <div class="buscador-wrap">
   <div class="buscador">
@@ -568,7 +461,7 @@
   <button class="lb-cerrar" id="lbCerrar" aria-label="Cerrar">&times;</button>
   <button class="lb-flecha lb-prev" id="lbPrev" aria-label="Anterior">&#8249;</button>
   <div class="lb-contenido">
-    <div class="lb-imagen"><img id="lbImg" src="" alt=""><span class="ribbon-lightbox" id="lbRibbon" style="display:none;">10% OFF Aniversario!</span></div>
+    <div class="lb-imagen"><img id="lbImg" src="" alt=""></div>
     <div class="lb-info">
       <h3 id="lbNombre"></h3>
       <div class="lb-precio" id="lbPrecio"></div>
@@ -594,31 +487,19 @@ function formatoPrecio(p){
   if(p===null || p===undefined) return "A pedido";
   return "$" + p.toLocaleString('es-AR');
 }
-function precioConDescuento(p){
-  return Math.round(p * 0.9);
-}
-function bloquePrecio(p){
-  if(p.precio === null || p.precio === undefined){
-    return `<div class="precio pedido">${formatoPrecio(p.precio)}</div>`;
-  }
-  const nuevo = precioConDescuento(p.precio);
-  return `<div class="precio"><span class="precio-anterior">${formatoPrecio(p.precio)}</span><span class="precio-nuevo">${formatoPrecio(nuevo)}</span></div>`;
-}
 function crearTarjeta(p, slideIndex){
   const div = document.createElement('div');
   div.className = 'card';
   const textoBusqueda = [p.nombre, p.cod, p.descripcion, ...(p.variantes||[]).map(v=>v.color), ...(p.variantes||[]).map(v=>v.talle)]
     .filter(Boolean).join(' ').toLowerCase();
   div.dataset.search = textoBusqueda;
-  const tieneDescuento = p.precio !== null && p.precio !== undefined;
   div.innerHTML = `
     <div class="foto">
       <img src="img/${p.imagenes[0]}" alt="${p.nombre}" loading="lazy" onload="this.classList.add('cargada')">
-      ${tieneDescuento ? '<span class="ribbon-aniversario">10% OFF Aniversario</span>' : ''}
     </div>
     <div class="info">
       <h3>${p.nombre} <span class="cod">(COD ${p.cod})</span></h3>
-      ${bloquePrecio(p)}
+      ${(p.precio !== null && p.precio !== undefined) ? `<div class="precio ${p.a_pedido ? 'pedido' : ''}">${formatoPrecio(p.precio)}</div>` : ''}
       <button type="button" class="btn-comprar-card">Comprar</button>
     </div>
   `;
@@ -640,7 +521,6 @@ const lbImg = document.getElementById('lbImg');
 const lbNombre = document.getElementById('lbNombre');
 const lbPrecio = document.getElementById('lbPrecio');
 const lbDesc = document.getElementById('lbDesc');
-const lbRibbon = document.getElementById('lbRibbon');
 const lbVariantes = document.getElementById('lbVariantes');
 let indiceActual = 0;
 const TEL_MARIANA = '5492364457857';
@@ -657,7 +537,7 @@ function detalleVariante(v){
   return partes.join(', ');
 }
 function linkComprar(s, v){
-  const precioTxt = (s.precio !== null && s.precio !== undefined) ? formatoPrecio(precioConDescuento(s.precio)) : formatoPrecio(s.precio);
+  const precioTxt = formatoPrecio(s.precio);
   const esEncaje = s.categoria === 'encaje';
   const tel = esEncaje ? TEL_MACARENA : TEL_MARIANA;
   const nombreDestino = esEncaje ? 'Macarena' : 'Mariana';
@@ -666,7 +546,7 @@ function linkComprar(s, v){
   return `https://wa.me/${tel}?text=${encodeURIComponent(msg)}`;
 }
 function linkEncargar(s){
-  const precioTxt = (s.precio !== null && s.precio !== undefined) ? formatoPrecio(precioConDescuento(s.precio)) : formatoPrecio(s.precio);
+  const precioTxt = formatoPrecio(s.precio);
   const esEncaje = s.categoria === 'encaje';
   const tel = esEncaje ? TEL_MACARENA : TEL_MARIANA;
   const nombreDestino = esEncaje ? 'Macarena' : 'Mariana';
@@ -679,14 +559,7 @@ function renderSlide(i){
   lbImg.src = 'img/' + s.imagen;
   lbImg.alt = s.nombre;
   lbNombre.textContent = `${s.nombre} (COD ${s.cod})`;
-  if(s.precio !== null && s.precio !== undefined){
-    const nuevo = precioConDescuento(s.precio);
-    lbPrecio.innerHTML = `<span class="precio-anterior">${formatoPrecio(s.precio)}</span><span class="precio-nuevo">${formatoPrecio(nuevo)}</span>`;
-    lbRibbon.style.display = '';
-  } else {
-    lbPrecio.textContent = '';
-    lbRibbon.style.display = 'none';
-  }
+  lbPrecio.textContent = (s.precio !== null && s.precio !== undefined) ? formatoPrecio(s.precio) : '';
   lbDesc.textContent = s.descripcion || '';
   const sinStockTotal = s.variantes && s.variantes.length && s.variantes.every(v => !(v.stock > 0));
   if(s.a_pedido || !s.variantes || !s.variantes.length || sinStockTotal){
