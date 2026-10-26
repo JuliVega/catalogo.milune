@@ -2,14 +2,15 @@
 <html lang="es-AR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#C1A3AC">
 <title>Milune Intimates | Catálogo</title>
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/favicon.png">
 <meta name="description" content="Milune Intimates. Lencería hermosa, cómoda y de calidad, pensada para vos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Alex+Brush&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
     --rosa: #AF8995;
@@ -30,7 +31,7 @@
     --maxw: 1180px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; -webkit-text-size-adjust:100%; text-size-adjust:100%;}
   body{
     font-family:'Poppins', sans-serif;
     font-weight:300;
@@ -38,13 +39,18 @@
     background:var(--fondo);
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
   a{color:inherit; text-decoration:none;}
   img{max-width:100%; display:block;}
+  button{font-family:inherit;}
+
+  /* ENCABEZADO */
   header{
     position:fixed; top:0; left:0; right:0; z-index:100;
     background:var(--fondo);
     border-bottom:1px solid var(--borde);
+    padding-top:env(safe-area-inset-top, 0px);
   }
   .nav-wrap{
     max-width:var(--maxw); margin:0 auto;
@@ -61,7 +67,9 @@
     transition:border-color .3s ease, color .3s ease;
   }
   nav.menu a:hover{color:var(--boton-oscuro); border-color:var(--boton-oscuro);}
-  .menu-toggle{display:none; background:none; border:none; font-size:26px; color:var(--boton-oscuro); cursor:pointer; position:relative; z-index:101;}
+  .menu-toggle{display:none; background:none; border:none; font-size:26px; color:var(--boton-oscuro); cursor:pointer; position:relative; z-index:101; padding:4px 8px;}
+
+  /* PORTADA */
   .hero{
     padding:150px 24px 70px;
     text-align:center;
@@ -82,9 +90,12 @@
     font-size:16px; font-weight:300; color:var(--texto); opacity:0.85;
     max-width:520px; margin:0 auto;
   }
+
+  /* BUSCADOR */
   .buscador-wrap{
-    max-width:640px; margin:0 auto 50px;
+    max-width:640px; margin:0 auto 36px;
     padding:0 24px;
+    scroll-margin-top:92px;
   }
   .buscador{
     display:flex; align-items:center; gap:12px;
@@ -93,15 +104,39 @@
   }
   .buscador svg{flex:0 0 auto; opacity:0.55;}
   .buscador input{
-    flex:1; border:none; background:none; outline:none;
+    flex:1; min-width:0; border:none; background:none; outline:none;
     font-family:'Poppins', sans-serif; font-weight:300;
     font-size:15px; color:var(--texto); letter-spacing:0.3px;
+    border-radius:0; -webkit-appearance:none; appearance:none;
   }
   .buscador input::placeholder{color:var(--texto-secundario); opacity:0.7;}
-  .sin-resultados{
-    text-align:center; font-size:14px; color:var(--texto-secundario);
-    padding:30px 0; display:none; grid-column:1/-1;
+  .buscador .limpiar{
+    display:none; flex:0 0 auto;
+    background:none; border:none; cursor:pointer;
+    font-size:26px; line-height:1; color:var(--texto-secundario);
+    padding:0 6px;
   }
+  .buscador.con-texto .limpiar{display:block;}
+  .buscador .limpiar:hover{color:var(--boton-oscuro);}
+
+  /* RESULTADOS DE BUSQUEDA (justo debajo del buscador) */
+  .resultados{
+    display:none;
+    max-width:var(--maxw); margin:0 auto 60px;
+    padding:0 24px;
+  }
+  .resultados.activo{display:block;}
+  .resultados-titulo{
+    text-align:center; font-size:13px; letter-spacing:2px; text-transform:uppercase;
+    font-weight:500; color:var(--texto); margin-bottom:30px;
+    overflow-wrap:anywhere;
+  }
+  .resultados-vacio{
+    text-align:center; font-size:14.5px; color:var(--texto-secundario);
+    max-width:460px; margin:0 auto; padding:10px 0 20px; line-height:1.7;
+  }
+
+  /* ACCESOS A CATEGORIAS */
   .accesos{
     max-width:var(--maxw); margin:0 auto;
     display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
@@ -131,6 +166,8 @@
     color:var(--blanco); font-size:19px; letter-spacing:2.5px; text-transform:uppercase;
     font-weight:600; background:rgba(35,29,24,0.62);
   }
+
+  /* CATEGORIAS Y TARJETAS */
   section.categoria{
     max-width:var(--maxw); margin:0 auto;
     padding:70px 24px 40px;
@@ -148,7 +185,7 @@
     grid-template-columns:repeat(4, 1fr);
     gap:32px 24px;
   }
-  .card{cursor:pointer;}
+  .card{cursor:pointer; min-width:0;}
   .card .foto{
     position:relative;
     width:100%; aspect-ratio:4/5; overflow:hidden;
@@ -188,6 +225,8 @@
     background:var(--rosa-cta-hover); transform:translateY(-1px);
     box-shadow:0 6px 18px rgba(0,0,0,0.28);
   }
+
+  /* QUIENES SOMOS */
   .quienes{
     max-width:var(--maxw); margin:0 auto; padding:90px 24px;
   }
@@ -209,10 +248,12 @@
     font-size:21px; font-weight:400; line-height:1.75;
     color:var(--texto); margin-bottom:20px;
   }
+
+  /* PIE */
   footer{
     background:var(--marron-rosado);
     color:var(--blanco);
-    padding:70px 24px 34px;
+    padding:70px 24px calc(34px + env(safe-area-inset-bottom, 0px));
     margin-top:60px;
   }
   .footer-wrap{
@@ -230,6 +271,8 @@
     text-align:center; font-size:11px; letter-spacing:1px;
     opacity:0.6; margin-top:56px;
   }
+
+  /* VISOR DE PRODUCTO */
   .lightbox{
     position:fixed; inset:0; z-index:1000;
     background:rgba(30,22,20,0.92);
@@ -251,7 +294,7 @@
   .lb-info{flex:1 1 40%; color:var(--blanco); max-width:340px; max-height:80vh; overflow-y:auto;}
   .lb-info h3{font-family:'Cormorant Garamond', serif; font-size:26px; font-weight:400; margin-bottom:14px;}
   .lb-info .lb-precio{font-size:18px; color:var(--rosa-suave); margin-bottom:18px; font-weight:500;}
-  .lb-info p.lb-desc{font-size:14px; font-weight:300; opacity:0.9; margin-bottom:20px; line-height:1.7;}
+  .lb-info p.lb-desc{font-size:14px; font-weight:300; opacity:0.9; margin-bottom:20px; line-height:1.7; white-space:pre-line;}
   .lb-info .stock-titulo{font-size:12px; letter-spacing:1.5px; text-transform:uppercase; opacity:0.7; margin-bottom:10px;}
   .lb-info .variante{
     display:flex; justify-content:space-between; align-items:center; gap:10px;
@@ -260,6 +303,7 @@
   }
   .lb-info .variante b{font-weight:500;}
   .lb-info .variante .frase-stock{color:var(--rosa-suave); font-weight:500; margin-right:auto; margin-left:10px;}
+  .lb-info .variante .frase-stock.agotado{opacity:0.6; font-weight:300;}
   .lb-info .btn-comprar{
     background:var(--rosa-cta); color:#1a1a1a;
     font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
@@ -285,7 +329,7 @@
   .lb-cerrar{
     position:absolute; top:28px; right:34px;
     font-size:32px; color:var(--blanco); cursor:pointer;
-    background:none; border:none; line-height:1; opacity:0.85;
+    background:none; border:none; line-height:1; opacity:0.85; z-index:11;
   }
   .lb-cerrar:hover{opacity:1;}
   .lb-flecha{
@@ -297,14 +341,23 @@
   .lb-flecha:hover{opacity:1;}
   .lb-prev{left:14px;}
   .lb-next{right:14px;}
+
+  /* TABLET */
   @media (max-width:1024px){
     .grid{grid-template-columns:repeat(3,1fr);}
+    .accesos{gap:16px;}
+    .acceso-label{font-size:16px; letter-spacing:1.8px; padding:12px 10px;}
+    nav.menu{gap:20px;}
+    nav.menu a{font-size:12px; letter-spacing:1px;}
   }
+
+  /* CELULAR */
   @media (max-width:768px){
     .nav-wrap{padding:10px 16px;}
     .brand img{height:38px; width:38px;}
-    .buscador-wrap{padding:0 18px; margin-bottom:36px;}
+    .buscador-wrap{padding:0 18px; margin-bottom:30px;}
     .buscador input{font-size:16px;}
+    .resultados{padding:0 18px; margin-bottom:44px;}
     .hero{padding:130px 18px 50px;}
     .hero .portada-img{max-width:260px; width:78%;}
     .hero h1{font-size:20px; margin:14px 0 12px;}
@@ -320,6 +373,7 @@
       gap:30px;
       transform:translateX(100%); transition:transform .35s ease;
       visibility:hidden;
+      padding:0 24px; text-align:center;
     }
     nav.menu.abierto{transform:translateX(0); visibility:visible;}
     nav.menu a{font-size:14px; padding:10px 0;}
@@ -330,6 +384,7 @@
     .card .info .precio{font-size:13px;}
     .card .btn-comprar-card{font-size:10.5px; padding:8px 20px; margin-top:10px;}
     section.categoria{padding:50px 18px 20px;}
+    .cat-header{margin-bottom:40px;}
     .cat-header p{font-size:13.5px; padding:0 10px;}
     .footer-wrap{grid-template-columns:1fr; gap:34px;}
     .quienes{padding:60px 20px;}
@@ -338,19 +393,19 @@
     .quienes-texto{text-align:center;}
     .quienes p{font-size:17px;}
     .lightbox{padding:0;}
-    .lb-contenido{flex-direction:column; max-height:100vh; gap:0; max-width:100%;}
-    .lb-imagen{max-height:42vh; width:100%;}
-    .lb-imagen img{max-height:42vh;}
-    .lb-info{max-width:100%; padding:18px 22px 26px; text-align:center; max-height:48vh;}
+    .lb-contenido{flex-direction:column; max-height:100vh; max-height:100dvh; gap:0; max-width:100%;}
+    .lb-imagen{max-height:42vh; max-height:42dvh; width:100%;}
+    .lb-imagen img{max-height:42vh; max-height:42dvh;}
+    .lb-info{max-width:100%; padding:18px 22px calc(26px + env(safe-area-inset-bottom, 0px)); text-align:center; max-height:48vh; max-height:48dvh;}
     .lb-info h3{font-size:20px;}
     .lb-info .variante{justify-content:center; text-align:left;}
     .lb-info .frase-stock{margin-left:0;}
     .lb-info .btn-comprar{flex:0 0 100%; text-align:center; margin-top:6px; display:block; width:100%; padding:12px 20px;}
     .lb-info .btn-encargar{display:block; width:100%; text-align:center;}
-    .lb-flecha{top:21vh; font-size:30px; padding:12px 14px;}
+    .lb-flecha{top:21vh; top:21dvh; font-size:30px; padding:12px 14px;}
     .lb-prev{left:8px;}
     .lb-next{right:8px;}
-    .lb-cerrar{top:14px; right:14px; font-size:28px;}
+    .lb-cerrar{top:calc(14px + env(safe-area-inset-top, 0px)); right:14px; font-size:28px;}
   }
   @media (max-width:380px){
     .grid{grid-template-columns:1fr 1fr; gap:16px 10px;}
@@ -362,7 +417,7 @@
 <header>
   <div class="nav-wrap">
     <a href="#inicio" class="brand">
-      <img src="img/logo-milune.png" alt="Milune Intimates" loading="lazy">
+      <img src="img/logo-milune.png" alt="Milune Intimates">
     </a>
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">&#9776;</button>
     <nav class="menu" id="menuNav">
@@ -375,17 +430,23 @@
   </div>
 </header>
 <div id="inicio" class="hero">
-  <img class="portada-img" src="img/portada-inicio.png" alt="Milune Intimates" loading="lazy">
+  <img class="portada-img" src="img/portada-inicio.png" alt="Milune Intimates">
   <h1>Nunca son solo conjuntos</h1>
   <p>Diseño, comodidad y calidad a precios accesibles. Conocé nuestra colección y elegí el modelo pensado para vos.</p>
 </div>
-<div class="buscador-wrap">
-  <div class="buscador">
+<div class="buscador-wrap" id="buscadorWrap">
+  <div class="buscador" id="buscador">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-    <input type="text" id="buscadorInput" placeholder="Buscá por nombre o código...">
+    <input type="text" id="buscadorInput" placeholder="Buscá por nombre, código o color..." autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" aria-label="Buscar productos">
+    <button type="button" class="limpiar" id="buscadorLimpiar" aria-label="Borrar búsqueda">&times;</button>
   </div>
 </div>
-<div class="accesos">
+<div class="resultados" id="resultados" aria-live="polite">
+  <div class="resultados-titulo" id="resultadosTitulo"></div>
+  <div class="grid" id="grid-resultados"></div>
+  <p class="resultados-vacio" id="resultadosVacio" style="display:none;">No encontramos productos con esa búsqueda. Probá con otra palabra o con el código, o escribinos por WhatsApp y te ayudamos a encontrar tu modelo.</p>
+</div>
+<div class="accesos" id="accesos">
   <a href="#comodos" class="acceso">
     <div class="acceso-foto"><img src="img/categoria-comodos.png" alt="Conjuntos Supercómodos" loading="lazy"></div>
     <span class="acceso-label">Conjuntos Supercómodos</span>
@@ -406,7 +467,6 @@
     <div class="linea"></div>
   </div>
   <div class="grid" id="grid-comodos"></div>
-  <p class="sin-resultados" id="sinResultadosComodos">No encontramos productos con esa búsqueda.</p>
 </section>
 <section class="categoria" id="encaje">
   <div class="cat-header">
@@ -415,7 +475,6 @@
     <div class="linea"></div>
   </div>
   <div class="grid" id="grid-encaje"></div>
-  <p class="sin-resultados" id="sinResultadosEncaje">No encontramos productos con esa búsqueda.</p>
 </section>
 <section class="categoria" id="bombachas">
   <div class="cat-header">
@@ -424,7 +483,6 @@
     <div class="linea"></div>
   </div>
   <div class="grid" id="grid-bombachas"></div>
-  <p class="sin-resultados" id="sinResultadosBombachas">No encontramos productos con esa búsqueda.</p>
 </section>
 <section class="quienes" id="quienes-somos">
   <div class="quienes-wrap">
@@ -472,9 +530,10 @@
   <button class="lb-flecha lb-next" id="lbNext" aria-label="Siguiente">&#8250;</button>
 </div>
 <script>
-const productos = [{"cod": 8204, "categoria": "encaje", "nombre": " Conjunto de puntilla con detalles en microfibra ", "descripcion": " Conjunto de puntilla con detalles en microfibra. Corpiño con arco y cola less regulable.", "precio": 31000, "a_pedido": false, "variantes": [{"talle": "90", "color": "blanco", "stock": 1}], "imagenes": ["encaje-8204.png"]}, {"cod": 8244, "categoria": "encaje", "nombre": "Conjunto de puntilla y tul Personalizado", "descripcion": "Este diseño combina puntilla y tul de la más alta calidad, creando una prenda única y sofisticada que realza tu figura.\n\nCaracterísticas principales:\n\nCorpiño triángulo con bretel regulable: máxima comodidad y ajuste personalizado.\nBombacha semi less: delicada, moderna y favorecedora.", "precio": 23000, "a_pedido": false, "variantes": [{"talle": "90", "color": "fresa", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}, {"talle": "100", "color": "fresa", "stock": 1}], "imagenes": ["8244.png"]}, {"cod": 8234, "categoria": "encaje", "nombre": "Conjunto de puntilla y breteles con strass", "descripcion": "Corpiño taza soft con push up y cola less regulable.", "precio": 31000, "a_pedido": false, "variantes": [{"talle": "85", "color": "bordó", "stock": 1}], "imagenes": ["encaje-8234.png"]}, {"cod": 8227, "categoria": "encaje", "nombre": "Conjunto de puntilla", "descripcion": "Corpiño triangulito y semi less.", "precio": 20700, "a_pedido": false, "variantes": [{"talle": "90", "color": "bordó", "stock": 1}, {"talle": "95", "color": "nude", "stock": 1}, {"talle": "95", "color": "blanco", "stock": 1}], "imagenes": ["encaje-8227.png"]}, {"cod": 8208, "categoria": "encaje", "nombre": "Conjunto de tul y puntilla", "descripcion": "Corpiño con arco y cola less regulable.", "precio": 22200, "a_pedido": false, "variantes": [{"talle": "110", "color": "negro", "stock": 1}], "imagenes": ["encaje-8208.png"]}, {"cod": 8226, "categoria": "encaje", "nombre": "Conjunto de puntilla", "descripcion": "Este conjunto incluye un corpiño triangulito con breteles en escote y una cola less regulable, asegurando un ajuste personalizado que realza tus curvas.\n\nCaracterísticas destacadas:\n\nMaterial: Puntilla de alta calidad para una sensación suave y sofisticada.\nAjuste: Breteles en escote y cola less regulable para mayor comodidad y ajuste perfecto.", "precio": 21300, "a_pedido": false, "variantes": [{"talle": "85", "color": "blanco", "stock": 1}, {"talle": "95", "color": "verde militar", "stock": 1}, {"talle": "95", "color": "blanco", "stock": 1}, {"talle": "95", "color": "negro", "stock": 0}, {"talle": "90", "color": "fresa", "stock": 0}, {"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["8226.png"]}, {"cod": 7020, "categoria": "comodos", "nombre": "Conjunto de puntilla y microfibra", "descripcion": "Conjunto compuesto por un corpiño triangulito y una cola less, este set es ideal para quienes buscan realzar su feminidad con un toque moderno.\n\nCaracterísticas destacadas\nMateriales premium: Microfibra suave y puntilla delicada para una experiencia única y placentera.\nDiseño sofisticado: Corpiño triangulito sin aro que brinda un calce natural y sensual.", "precio": 21000, "a_pedido": false, "variantes": [{"talle": "90", "color": "rosa vintage", "stock": 1}, {"talle": "95", "color": "verde militar", "stock": 1}, {"talle": "95", "color": "blanco", "stock": 1}, {"talle": "100", "color": "verde militar", "stock": 1}, {"talle": "90", "color": "negro", "stock": 2}, {"talle": "95", "color": "negro", "stock": 1}, {"talle": "100", "color": "negro", "stock": 1}, {"talle": "90", "color": "blanco", "stock": 1}], "imagenes": ["comodos-7020.png"]}, {"cod": 1011, "categoria": "encaje", "nombre": "Conjunto de puntilla. Corpiño triangulito y cola less.", "descripcion": "", "precio": 14400, "a_pedido": false, "variantes": [{"talle": "95", "color": "blanco", "stock": 1}], "imagenes": ["encaje-1011.png"]}, {"cod": 6000, "categoria": "encaje", "nombre": "Conjunto de tul. Corpiño triangulito y cola less regulable.", "descripcion": "", "precio": 11300, "a_pedido": false, "variantes": [{"talle": "90", "color": "rojo", "stock": 1}, {"talle": "100", "color": "negro", "stock": 1}], "imagenes": ["encaje-6000.png"]}, {"cod": 1004, "categoria": "encaje", "nombre": "Conjunto de encaje. Corpiño triangulito y cola less.", "descripcion": "", "precio": 12000, "a_pedido": false, "variantes": [{"talle": "85", "color": "rosa vintage", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["encaje-1004-1.png", "encaje-1004-2.png"]}, {"cod": 8209, "categoria": "encaje", "nombre": "Conjunto de encaje.", "descripcion": "Tricot y puntilla que incluye un corpiño con arco y una vedetina a juego", "precio": 24000, "a_pedido": false, "variantes": [{"talle": "100", "color": "fresa", "stock": 1}], "imagenes": ["encaje-8209.png"]}, {"cod": 1921, "categoria": "encaje", "nombre": "Conjunto de encaje.", "descripcion": "Sigry. Cuenta con un corpiño con arco y un delicado dije de perla, acompañado por una bombacha estilo colaless", "precio": 22700, "a_pedido": false, "variantes": [{"talle": "110", "color": "celeste", "stock": 1}], "imagenes": ["encaje-1921.png"]}, {"cod": 8100, "categoria": "comodos", "nombre": "Conjunto de microfibra y elástico personalizado", "descripcion": "Corpiño top triangulito de tela doble y cola less.", "precio": 21200, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}, {"talle": "90", "color": "verde", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-8100.png"]}, {"cod": 8193, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Corpiño premoldeado de tela doble con arco y cola less regulable.", "precio": 22400, "a_pedido": false, "variantes": [{"talle": "85", "color": "rosa vintage", "stock": 2}], "imagenes": ["comodos-8193.png"]}, {"cod": 8192, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Este conjunto incluye un corpiño premoldeado de tela doble que ofrece un soporte excepcional, y una cola less que asegura un look sin marcas. Confeccionado en microfibra de alta calidad que se adapta perfectamente al cuerpo.", "precio": 21200, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}, {"talle": "100", "color": "nude", "stock": 1}], "imagenes": ["8192.png"]}, {"cod": 8216, "categoria": "comodos", "nombre": "Conjunto de microfibra y elástico personalizado", "descripcion": "Corpiño triangulito y cola less.", "precio": 20000, "a_pedido": false, "variantes": [{"talle": "90", "color": "blanco", "stock": 2}, {"talle": "95", "color": "negro", "stock": 1}, {"talle": "100", "color": "blanco", "stock": 1}], "imagenes": ["comodos-8216.png"]}, {"cod": 8218, "categoria": "comodos", "nombre": "Conjunto de tricot", "descripcion": "Corpiño triangulito y cola less regulable.", "precio": 18400, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8218.png"]}, {"cod": 2013, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Conjunto de microfibra. Corpiño top con cierre delantero y cola less tiro alto.", "precio": 14800, "a_pedido": false, "variantes": [{"talle": "95", "color": "verde militar", "stock": 1}], "imagenes": ["comodos-2013.png"]}, {"cod": 6008, "categoria": "comodos", "nombre": "Conjunto de Morley", "descripcion": "Strapless con cola less de Morley", "precio": 14700, "a_pedido": false, "variantes": [{"talle": "95", "color": "gris", "stock": 1}], "imagenes": ["comodos-6008-2.png"]}, {"cod": 8215, "categoria": "comodos", "nombre": "Conjunto de morley", "descripcion": "Corpiño top de doble tela y cola less.", "precio": 21000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}, {"talle": "95", "color": "vison", "stock": 1}], "imagenes": ["comodos-8215.png"]}, {"cod": 8190, "categoria": "comodos", "nombre": "Conjunto de morley y elástico personalizado", "descripcion": "Corpiño triangulito y cola less.", "precio": 22600, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8190.png"]}, {"cod": 6005, "categoria": "comodos", "nombre": "Conjunto de morley y cola less", "descripcion": "", "precio": 18000, "a_pedido": false, "variantes": [{"talle": "talle 2", "color": "rosa vintage", "stock": 1}], "imagenes": ["comodos-6005.png"]}, {"cod": 3010, "categoria": "comodos", "nombre": "Conjunto de algodón con elástico personalizado", "descripcion": "Conjunto de algodón con elástico personalizado. Corpiño triangulito y cola less.", "precio": 16000, "a_pedido": false, "variantes": [{"talle": "95", "color": "gris", "stock": 1}], "imagenes": ["comodos-3010.png"]}, {"cod": 3013, "categoria": "comodos", "nombre": "Conjunto de algodón", "descripcion": "Conjunto de algodón. Corpiño triangulito con taza soft sin push up y cola less.", "precio": 19800, "a_pedido": false, "variantes": [{"talle": "90", "color": "gris", "stock": 1}], "imagenes": ["comodos-3013.png"]}, {"cod": 6129, "categoria": "bombachas", "nombre": "Corpiño reductor", "descripcion": "Corpiño Reductor Power Encaje", "precio": 20000, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["bombachas-6129.png"]}, {"cod": 5333, "categoria": "comodos", "nombre": "Conjunto con top dealgodón con elástico personalizado", "descripcion": "Conjunto con top dealgodón con elástico personalizado", "precio": 17000, "a_pedido": false, "variantes": [{"talle": "85", "color": "blanco", "stock": 1}], "imagenes": ["comodos-5333.png"]}, {"cod": 206, "categoria": "comodos", "nombre": "Trenda 206", "descripcion": "Corpiño halter modelador y less doble cintura algodón", "precio": 19700, "a_pedido": false, "variantes": [{"talle": "110", "color": "blanco", "stock": 1}], "imagenes": ["comodos-206-1.png"]}, {"cod": 5820, "categoria": "comodos", "nombre": "Sigry 5820", "descripcion": "Conjunto de morley. Corpiño push up soft con dije personalizado", "precio": 23000, "a_pedido": true, "variantes": [], "imagenes": ["comodos-5820.png"]}, {"cod": 605, "categoria": "comodos", "nombre": "Annais 605", "descripcion": "Conjunto de morley", "precio": 19000, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-605.png"]}, {"cod": 4385, "categoria": "comodos", "nombre": "Conjunto Lara Teens", "descripcion": "Conjunto de microfibra y la puntilla de textura suave y atractiva.\nEl corpiño con push up y la bombacha colaless aseguran un ajuste cómodo y favorecedor.", "precio": 21000, "a_pedido": false, "variantes": [{"talle": "95", "color": "blanco", "stock": 2}, {"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-4385.png"]}, {"cod": 537, "categoria": "comodos", "nombre": "Conjunto de algodón Frashe 537", "descripcion": "Conjunto en algodón y lycra, e incluye un corpiño con taza soft y base, acompañado de una vedetina a juego", "precio": null, "a_pedido": true, "variantes": [], "imagenes": ["comodos-537.png"]}, {"cod": 8102, "categoria": "comodos", "nombre": "Conjunto de algodón y puntilla.", "descripcion": "Corpiño taza soft con push up y cola less.", "precio": 23000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8102.png"]}, {"cod": 8175, "categoria": "comodos", "nombre": "Conjunto de algodón y puntilla", "descripcion": "Corpiño taza soft con push up y cola less.", "precio": 25000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8175.png"]}, {"cod": 4790, "categoria": "comodos", "nombre": "Conjunto de microfibra y puntilla", "descripcion": "Corpiño taza soft con push up y cola less.", "precio": 27000, "a_pedido": true, "variantes": [], "imagenes": ["comodos-4790.png"]}, {"cod": 8214, "categoria": "comodos", "nombre": "Conjunto de morley", "descripcion": "Corpiño taza soft con push up y cola less regulable.", "precio": 27000, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-8214.png"]}, {"cod": 8060, "categoria": "comodos", "nombre": "Conjunto de algodón y puntilla", "descripcion": "Corpiño taza soft con push up y vedetina.", "precio": 25000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8060.png"]}, {"cod": 6001, "categoria": "comodos", "nombre": "Conjunto de algodón", "descripcion": "Conjunto de algodón estampado mini corazones. Corpiño triangulito y cola less.", "precio": 12800, "a_pedido": false, "variantes": [{"talle": "90", "color": "morado", "stock": 1}, {"talle": "95", "color": "morado", "stock": 1}], "imagenes": ["comodos-6001.png"]}, {"cod": 3025, "categoria": "comodos", "nombre": "Conjunto de algodon", "descripcion": "conjunto de algodon y puntilla con cola less. Top y less con puntilla.", "precio": 15000, "a_pedido": false, "variantes": [{"talle": "talle 4", "color": "negro", "stock": 1}], "imagenes": ["comodos-3025.png"]}, {"cod": 1001, "categoria": "encaje", "nombre": "Lencería de encaje", "descripcion": "Conjunto de puntilla. Corpiño triangulito y cola less regulable.", "precio": 13000, "a_pedido": false, "variantes": [{"talle": "90", "color": "rosa vintage", "stock": 1}, {"talle": "90", "color": "negro", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["encaje-1001.png"]}, {"cod": 3009, "categoria": "comodos", "nombre": "Conjunto de algodón", "descripcion": "Conjunto taza soft de algodon con vedetina", "precio": 19600, "a_pedido": false, "variantes": [{"talle": "90", "color": "blanco", "stock": 1}], "imagenes": ["comodos-3009.png"]}, {"cod": 1007, "categoria": "encaje", "nombre": "Conjunto de encaje", "descripcion": "Conjunto de encaje. Corpiño taza soft con push up y cola less.", "precio": 21200, "a_pedido": false, "variantes": [{"talle": "95", "color": "rosa vintage", "stock": 1}], "imagenes": ["encaje-1007.png"]}, {"cod": 1003, "categoria": "encaje", "nombre": "Conjunto de encaje", "descripcion": "Conjunto de puntilla. Corpiño triangulito taza soft sin push up y cola less.", "precio": 18000, "a_pedido": false, "variantes": [{"talle": "85", "color": "rosa vintage", "stock": 1}, {"talle": "90", "color": "rosa vintage", "stock": 1}, {"talle": "100", "color": "uva", "stock": 1}], "imagenes": ["encaje-1003.png"]}, {"cod": 2016, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Conjunto de microfibra, corpiño top con breteles de elástico personalizado, y cola less.", "precio": 15300, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-2016.png"]}, {"cod": 4000, "categoria": "comodos", "nombre": "Conjunto de microfibra y puntilla", "descripcion": "Conjunto de microfibra y puntilla. Corpiño taza soft con push up y cola less.", "precio": 27500, "a_pedido": false, "variantes": [{"talle": "85", "color": "amarillo", "stock": 1}], "imagenes": ["comodos-4000.png"]}, {"cod": 5006, "categoria": "comodos", "nombre": "Conjunto top de morley", "descripcion": "Conjunto top de morley con cola less regulable", "precio": 11200, "a_pedido": true, "variantes": [], "imagenes": ["comodos-5006.png"]}, {"cod": 5005, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Conjunto top de microfibra con cola less", "precio": 9600, "a_pedido": false, "variantes": [{"talle": "95", "color": "verde", "stock": 1}, {"talle": "100", "color": "verde", "stock": 1}], "imagenes": ["comodos-5005.png"]}, {"cod": 8240, "categoria": "comodos", "nombre": "Conjunto taza soft de morley", "descripcion": "Conjunto taza soft de morley sin costura y cola less tiro alto", "precio": 27000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8240.png"]}, {"cod": 8186, "categoria": "comodos", "nombre": "Conjunto de algodón y elástico personalizado", "descripcion": "Conjunto de algodón y elástico personalizado. Corpiño triangulito taza soft sin push up y cola less.", "precio": 24000, "a_pedido": false, "variantes": [{"talle": "85", "color": "amarillo", "stock": 1}], "imagenes": ["comodos-8186.png"]}, {"cod": 2011, "categoria": "comodos", "nombre": "Conjunto de microfibra con elástico personalizado", "descripcion": "Conjunto de microfibra con elástico personalizado. Corpiño triangulito taza soft sin push up y cola less.", "precio": 20000, "a_pedido": false, "variantes": [{"talle": "85", "color": "lima", "stock": 1}], "imagenes": ["comodos-2011.png"]}, {"cod": "P97", "categoria": "bombachas", "nombre": "Soquetes mujer", "descripcion": "Soquetes de algodón", "precio": 3000, "a_pedido": true, "variantes": [{"talle": "Único", "color": "negro", "stock": 0}, {"talle": "Único", "color": "gris", "stock": 0}], "imagenes": ["bombachas-P97.png"]}, {"cod": "K29", "categoria": "bombachas", "nombre": "Medias media caña", "descripcion": "Pares de medias media caña", "precio": 4000, "a_pedido": false, "variantes": [{"talle": null, "color": "negro", "stock": 2}, {"talle": null, "color": "gris", "stock": 3}], "imagenes": ["bombachas-K29.png"]}, {"cod": 111, "categoria": "bombachas", "nombre": "Culotte less", "descripcion": "Culotte less de algodon", "precio": 2600, "a_pedido": false, "variantes": [{"talle": null, "color": null, "stock": 12}], "imagenes": ["bombachas-111.png"]}, {"cod": 112, "categoria": "bombachas", "nombre": "Cola less", "descripcion": "Cola less algodón", "precio": 2600, "a_pedido": false, "variantes": [{"talle": null, "color": null, "stock": 7}], "imagenes": ["bombachas-112.png"]}, {"cod": "P141BLANCO", "categoria": "bombachas", "nombre": "Cola less pack x 2", "descripcion": "Pack de 2 cola less de encaje", "precio": 10300, "a_pedido": false, "variantes": [{"talle": "Único", "color": "blanco", "stock": 1}], "imagenes": ["bombachas-P141BLANCO.png"]}, {"cod": "P164NEGRO", "categoria": "bombachas", "nombre": "Cola less pack x 2", "descripcion": "Pack de 2 cola less de tul", "precio": 10000, "a_pedido": false, "variantes": [{"talle": "Único", "color": "negro", "stock": 1}], "imagenes": ["bombachas-P164NEGRO.png"]}, {"cod": 301, "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack de 3 cola less de algodon con elastico personalizado", "precio": 14100, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-301.png"]}, {"cod": "P122", "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack x3 Cola less de algodón liso con estampa.", "precio": 16000, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-P122.png"]}, {"cod": "P127", "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack x3 Cola less algodón y elástico personalizado.", "precio": 14500, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-P127-1.png", "bombachas-P127-2.png"]}, {"cod": 8237, "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack de 3 cola less pegadas/sin costura de microfibra, regulables", "precio": 23000, "a_pedido": false, "variantes": [{"talle": "Único", "color": "blanco", "stock": 1}], "imagenes": ["bombachas-8237.png"]}, {"cod": 8239, "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Bombachas pegadas sin costuras", "precio": 22500, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-8239.png"]}, {"cod": "120_kaury", "categoria": "bombachas", "nombre": "Bombachas Pack x 2", "descripcion": "Pack de 2 bombachas, talle universal, de algodón.", "precio": 15000, "a_pedido": false, "variantes": [{"talle": null, "color": null, "stock": 1}], "imagenes": ["120_kaury.png"]}, {"cod": 1016, "categoria": "encaje", "nombre": "Conjunto de puntilla con aro y lees de microfibra", "descripcion": " Este conjunto incluye un corpiño con aro que brinda soporte y realce, acompañado de una colaless confeccionada en puntilla suave, perfecta para ocasiones en las que querés sentirte diferente.\n\nCaracterísticas principales:\nDiseño: Puntilla delicada y corpiño con aro que ayuda a realzar tu figura.\nEstilo: Colaless para un look moderno y atractivo.", "precio": 16300, "a_pedido": false, "variantes": [{"talle": "85", "color": "blanco", "stock": 1}], "imagenes": ["1016_besol.png"]}, {"cod": 8675, "categoria": "comodos", "nombre": "Conjunto Deportivo", "descripcion": "Este conjunto está confeccionado en una suave mezcla de algodón y lycra, asegurando una sensación agradable y una elasticidad óptima que se adapta perfectamente a tu cuerpo.\n\nCaracterísticas destacadas:\n\nMaterial: Algodón con lycra, ideal para uso cotidiano o deportivo.\nDiseño: Liso, con elástico personalizado que aporta un toque moderno y distintivo.\nIncluye: Corpiño top y colaless para una mayor libertad de movimiento.", "precio": 17000, "a_pedido": false, "variantes": [{"talle": "3", "color": "blanco", "stock": 0}, {"talle": "4", "color": "blanco", "stock": 1}], "imagenes": ["6875_besol.png"]}, {"cod": "101L", "categoria": "bombachas", "nombre": "Soquetes Pack x 3", "descripcion": "Material: Algodón y elastano\nEstilo: Soquete\nTalle: Único\nColores: Surtidos\nEste pack no solo destaca por su diseño moderno y versátil, sino que también te brinda una suavidad excepcional gracias a su confección en algodón y elastano. Perfecto para cualquier ocasión, desde tu rutina diaria hasta esos momentos especiales.", "precio": 8600, "a_pedido": false, "variantes": [{"talle": null, "color": "colores surtidos", "stock": 0}], "imagenes": ["101L_besol.png"]}, {"cod": "101L.u", "categoria": "bombachas", "nombre": "Soquetes mujer", "descripcion": "Material: Algodón y elastano\nEstilo: Soquete\nTalle: Único\nColores: Surtidos\nEste pack no solo destaca por su diseño moderno y versátil, sino que también te brinda una suavidad excepcional gracias a su confección en algodón y elastano. Perfecto para cualquier ocasión, desde tu rutina diaria hasta esos momentos especiales.", "precio": 3000, "a_pedido": false, "variantes": [{"talle": null, "color": "colores surtidos", "stock": 0}], "imagenes": ["101L_besol.u.png"]}, {"cod": 8185, "categoria": "comodos", "nombre": "Conjunto De Algodón, Triangulito Y Cola Less", "descripcion": "Perfecto para quienes buscan una prenda íntima que se adapte suavemente a su cuerpo, este conjunto está confeccionado en algodón y elástico personalizado.\n\nCaracterísticas destacadas:\n\nMaterial: Algodón y elástico para una sensación suave y ajuste impecable.\nDiseño: Corpiño triangulito y cola less que realzan tu figura.", "precio": 19000, "a_pedido": false, "variantes": [{"talle": "95", "color": "blanco", "stock": 1}, {"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["8185_besol.png"]}, {"cod": 117, "categoria": "bombachas", "nombre": "Colaless Morley Pack X 3", "descripcion": "Colaless Morley Pack X 3, la elección perfecta que combina estilo, confort y calidad para tu día a día.\n\nCaracterísticas destacadas:\nMaterial: Confeccionadas en morley de alta calidad, garantizando una suavidad y durabilidad excepcionales.\nDiseño: Colaless, ideal para cualquier ocasión, proporcionando un ajuste perfecto y libre de marcas.\nPack: Incluye tres bombachas en colores surtidos, adaptándose a tus preferencias y necesidades.", "precio": 17000, "a_pedido": false, "variantes": [{"talle": null, "color": "colores surtidos", "stock": 2}], "imagenes": ["117_besol.png"]}, {"cod": 148, "categoria": "bombachas", "nombre": "Top de Morley", "descripcion": "Este top con frunce está confeccionado en morley de alta calidad, garantizando suavidad y durabilidad.\n\nCaracterísticas destacadas:\n\nMaterial: - Morley de alta calidad, proporcionando una textura suave y resistente.\n\nDiseño: - Frunce delicado que añade un toque de sofisticación.", "precio": 14300, "a_pedido": false, "variantes": [{"talle": "M", "color": "gris", "stock": 1}, {"talle": "L", "color": "rosa", "stock": 1}], "imagenes": ["148_besol.png"]}, {"cod": 1287, "categoria": "encaje", "nombre": "Conjunto de puntilla con aro", "descripcion": "Este conjunto incluye un corpiño bustier con aro y una colaless, diseñados para brindarte comodidad y estilo en todo momento.\n\nMaterial: Puntilla y tul fantasía\n\nLa puntilla y el tul fantasía de este conjunto ofrecen un diseño sofisticado, perfecto para cualquier ocasión. El corpiño bustier garantiza un soporte ideal, mientras que la colaless asegura un ajuste cómodo y atractivo.", "precio": 23000, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["1287_besol.png"]}, {"cod": 155, "categoria": "bombachas", "nombre": "Pack x 3 Cola Less de Puntilla", "descripcion": "Cada prenda está confeccionada en delicada puntilla, aportando un toque elegante y sensual, mientras que el elástico personalizado asegura un calce perfecto y firme.\n\nCaracterísticas destacadas:\n\nPack x 3 unidades: Más opciones para combinar y disfrutar.\nMaterial: Puntilla suave y resistente, que se adapta suavemente a tu cuerpo.\nElástico personalizado: Mayor ajuste y diseño exclusivo.", "precio": 15600, "a_pedido": false, "variantes": [{"talle": null, "color": "colores surtidos", "stock": 0}], "imagenes": ["155_besol.png"]}]
-;
+const productos = [{"cod": 8204, "categoria": "encaje", "nombre": "Conjunto de puntilla con detalles en microfibra", "descripcion": "Conjunto de puntilla con detalles en microfibra. Corpiño con arco y cola less regulable.", "precio": 31000, "a_pedido": false, "variantes": [{"talle": "85", "color": "blanco", "stock": 1}, {"talle": "90", "color": "fresa", "stock": 1}, {"talle": "90", "color": "blanco", "stock": 1}], "imagenes": ["encaje-8204.png"]}, {"cod": 8244, "categoria": "encaje", "nombre": "Conjunto de puntilla y tul Personalizado", "descripcion": "Este diseño combina puntilla y tul de la más alta calidad, creando una prenda única y sofisticada que realza tu figura.\n\nCaracterísticas principales:\n\nCorpiño triángulo con bretel regulable: máxima comodidad y ajuste personalizado.\nBombacha semi less: delicada, moderna y favorecedora.", "precio": 23000, "a_pedido": false, "variantes": [{"talle": "90", "color": "fresa", "stock": 2}, {"talle": "95", "color": "gris", "stock": 1}], "imagenes": ["8244.png"]}, {"cod": 8234, "categoria": "encaje", "nombre": "Conjunto de puntilla y breteles con strass", "descripcion": "Corpiño taza soft con push up y cola less regulable.", "precio": 31000, "a_pedido": false, "variantes": [{"talle": "85", "color": "bordó", "stock": 1}], "imagenes": ["encaje-8234.png"]}, {"cod": 8227, "categoria": "encaje", "nombre": "Conjunto de puntilla", "descripcion": "Corpiño triangulito y semi less.", "precio": 20700, "a_pedido": false, "variantes": [{"talle": "90", "color": "bordó", "stock": 1}, {"talle": "95", "color": "nude", "stock": 1}, {"talle": "95", "color": "blanco", "stock": 1}], "imagenes": ["encaje-8227.png"]}, {"cod": 8208, "categoria": "encaje", "nombre": "Conjunto de tul y puntilla", "descripcion": "Corpiño con arco y cola less regulable.", "precio": 22200, "a_pedido": false, "variantes": [{"talle": "110", "color": "negro", "stock": 1}, {"talle": "100", "color": "negro", "stock": 1}, {"talle": "115", "color": "nude", "stock": 1}], "imagenes": ["encaje-8208.png"]}, {"cod": 8226, "categoria": "encaje", "nombre": "Conjunto de puntilla", "descripcion": "Este conjunto incluye un corpiño triangulito con breteles en escote y una cola less regulable, asegurando un ajuste personalizado que realza tus curvas.\n\nCaracterísticas destacadas:\n\nMaterial: Puntilla de alta calidad para una sensación suave y sofisticada.\nAjuste: Breteles en escote y cola less regulable para mayor comodidad y ajuste perfecto.", "precio": 21300, "a_pedido": false, "variantes": [{"talle": "85", "color": "blanco", "stock": 1}, {"talle": "95", "color": "verde militar", "stock": 2}, {"talle": "95", "color": "blanco", "stock": 1}], "imagenes": ["8226.png"]}, {"cod": 7020, "categoria": "comodos", "nombre": "Conjunto de puntilla y microfibra", "descripcion": "Conjunto compuesto por un corpiño triangulito y una cola less, este set es ideal para quienes buscan realzar su feminidad con un toque moderno.\n\nCaracterísticas destacadas\nMateriales premium: Microfibra suave y puntilla delicada para una experiencia única y placentera.\nDiseño sofisticado: Corpiño triangulito sin aro que brinda un calce natural y sensual.", "precio": 21000, "a_pedido": false, "variantes": [{"talle": "95", "color": "rosa vintage", "stock": 1}, {"talle": "95", "color": "blanco", "stock": 1}, {"talle": "100", "color": "verde militar", "stock": 1}, {"talle": "90", "color": "negro", "stock": 2}, {"talle": "95", "color": "negro", "stock": 1}, {"talle": "100", "color": "negro", "stock": 2}, {"talle": "90", "color": "blanco", "stock": 1}], "imagenes": ["comodos-7020.png"]}, {"cod": 1011, "categoria": "encaje", "nombre": "Conjunto de puntilla. Corpiño triangulito y cola less.", "descripcion": "", "precio": 14400, "a_pedido": false, "variantes": [{"talle": "95", "color": "blanco", "stock": 1}], "imagenes": ["encaje-1011.png"]}, {"cod": 6000, "categoria": "encaje", "nombre": "Conjunto de tul. Corpiño triangulito y cola less regulable.", "descripcion": "", "precio": 11300, "a_pedido": false, "variantes": [{"talle": "90", "color": "rojo", "stock": 1}, {"talle": "100", "color": "negro", "stock": 1}], "imagenes": ["encaje-6000.png"]}, {"cod": 1004, "categoria": "encaje", "nombre": "Conjunto de encaje. Corpiño triangulito y cola less.", "descripcion": "", "precio": 12000, "a_pedido": false, "variantes": [{"talle": "85", "color": "rosa vintage", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}, {"talle": "100", "color": "negro", "stock": 1}], "imagenes": ["encaje-1004-1.png", "encaje-1004-2.png"]}, {"cod": 8209, "categoria": "encaje", "nombre": "Conjunto de encaje.", "descripcion": "Tricot y puntilla que incluye un corpiño con arco y una vedetina a juego", "precio": 24000, "a_pedido": false, "variantes": [{"talle": "100", "color": "fresa", "stock": 1}], "imagenes": ["encaje-8209.png"]}, {"cod": 1921, "categoria": "encaje", "nombre": "Conjunto de encaje.", "descripcion": "Sigry. Cuenta con un corpiño con arco y un delicado dije de perla, acompañado por una bombacha estilo colaless", "precio": 22700, "a_pedido": false, "variantes": [{"talle": "110", "color": "celeste", "stock": 1}], "imagenes": ["encaje-1921.png"]}, {"cod": 8100, "categoria": "comodos", "nombre": "Conjunto de microfibra y elástico personalizado", "descripcion": "Corpiño top triangulito de tela doble y cola less.", "precio": 21200, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}, {"talle": "90", "color": "verde", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-8100.png"]}, {"cod": 8193, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Corpiño premoldeado de tela doble con arco y cola less regulable.", "precio": 22400, "a_pedido": false, "variantes": [{"talle": "85", "color": "rosa vintage", "stock": 2}], "imagenes": ["comodos-8193.png"]}, {"cod": 8192, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Este conjunto incluye un corpiño premoldeado de tela doble que ofrece un soporte excepcional, y una cola less que asegura un look sin marcas. Confeccionado en microfibra de alta calidad que se adapta perfectamente al cuerpo.", "precio": 21200, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}, {"talle": "95", "color": "negro", "stock": 1}, {"talle": "100", "color": "nude", "stock": 1}], "imagenes": ["8192.png"]}, {"cod": 8216, "categoria": "comodos", "nombre": "Conjunto de microfibra y elástico personalizado", "descripcion": "Corpiño triangulito y cola less.", "precio": 20000, "a_pedido": false, "variantes": [{"talle": "90", "color": "blanco", "stock": 2}, {"talle": "100", "color": "blanco", "stock": 1}], "imagenes": ["comodos-8216.png"]}, {"cod": 8218, "categoria": "comodos", "nombre": "Conjunto de tricot", "descripcion": "Corpiño triangulito y cola less regulable.", "precio": 18400, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8218.png"]}, {"cod": 2013, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Conjunto de microfibra. Corpiño top con cierre delantero y cola less tiro alto.", "precio": 14800, "a_pedido": false, "variantes": [{"talle": "95", "color": "verde militar", "stock": 1}], "imagenes": ["comodos-2013.png"]}, {"cod": 6008, "categoria": "comodos", "nombre": "Conjunto de Morley", "descripcion": "Strapless con cola less de Morley", "precio": 14700, "a_pedido": false, "variantes": [{"talle": "95", "color": "gris", "stock": 1}], "imagenes": ["comodos-6008-2.png"]}, {"cod": 8215, "categoria": "comodos", "nombre": "Conjunto de morley", "descripcion": "Corpiño top de doble tela y cola less.", "precio": 21000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}, {"talle": "95", "color": "vison", "stock": 1}], "imagenes": ["comodos-8215.png"]}, {"cod": 8190, "categoria": "comodos", "nombre": "Conjunto de morley y elástico personalizado", "descripcion": "Corpiño triangulito y cola less.", "precio": 22600, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8190.png"]}, {"cod": 6005, "categoria": "comodos", "nombre": "Conjunto de morley y cola less", "descripcion": "", "precio": 18000, "a_pedido": false, "variantes": [{"talle": "talle 2", "color": "rosa vintage", "stock": 1}], "imagenes": ["comodos-6005.png"]}, {"cod": 3010, "categoria": "comodos", "nombre": "Conjunto de algodón con elástico personalizado", "descripcion": "Conjunto de algodón con elástico personalizado. Corpiño triangulito y cola less.", "precio": 16000, "a_pedido": false, "variantes": [{"talle": "100", "color": "blanco", "stock": 1}], "imagenes": ["comodos-3010.png"]}, {"cod": 3013, "categoria": "comodos", "nombre": "Conjunto de algodón", "descripcion": "Conjunto de algodón. Corpiño triangulito con taza soft sin push up y cola less.", "precio": 19800, "a_pedido": false, "variantes": [{"talle": "90", "color": "gris", "stock": 1}], "imagenes": ["comodos-3013.png"]}, {"cod": 6129, "categoria": "bombachas", "nombre": "Corpiño reductor", "descripcion": "Corpiño Reductor Power Encaje", "precio": 20000, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["bombachas-6129.png"]}, {"cod": 5333, "categoria": "comodos", "nombre": "Conjunto con top dealgodón con elástico personalizado", "descripcion": "Conjunto con top dealgodón con elástico personalizado", "precio": 17000, "a_pedido": false, "variantes": [{"talle": "85", "color": "blanco", "stock": 1}], "imagenes": ["comodos-5333.png"]}, {"cod": 206, "categoria": "comodos", "nombre": "Trenda 206", "descripcion": "Corpiño halter modelador y less doble cintura algodón", "precio": 19700, "a_pedido": false, "variantes": [{"talle": "110", "color": "blanco", "stock": 1}], "imagenes": ["comodos-206-1.png"]}, {"cod": 5820, "categoria": "comodos", "nombre": "Sigry 5820", "descripcion": "Conjunto de morley. Corpiño push up soft con dije personalizado", "precio": 23000, "a_pedido": true, "variantes": [], "imagenes": ["comodos-5820.png"]}, {"cod": 605, "categoria": "comodos", "nombre": "Annais 605", "descripcion": "Conjunto de morley", "precio": 19000, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-605.png"]}, {"cod": 4385, "categoria": "comodos", "nombre": "Conjunto Lara Teens", "descripcion": "Conjunto de microfibra y la puntilla de textura suave y atractiva.\nEl corpiño con push up y la bombacha colaless aseguran un ajuste cómodo y favorecedor.", "precio": 21000, "a_pedido": false, "variantes": [{"talle": "95", "color": "blanco", "stock": 2}, {"talle": "95", "color": "negro", "stock": 0}], "imagenes": ["comodos-4385.png"]}, {"cod": 537, "categoria": "comodos", "nombre": "Conjunto de algodón Frashe 537", "descripcion": "Conjunto en algodón y lycra, e incluye un corpiño con taza soft y base, acompañado de una vedetina a juego", "precio": null, "a_pedido": true, "variantes": [], "imagenes": ["comodos-537.png"]}, {"cod": 8102, "categoria": "comodos", "nombre": "Conjunto de algodón y puntilla.", "descripcion": "Corpiño taza soft con push up y cola less.", "precio": 23000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8102.png"]}, {"cod": 8175, "categoria": "comodos", "nombre": "Conjunto de algodón y puntilla", "descripcion": "Corpiño taza soft con push up y cola less.", "precio": 25000, "a_pedido": false, "variantes": [{"talle": "90", "color": "fresa", "stock": 1}], "imagenes": ["comodos-8175.png"]}, {"cod": 4790, "categoria": "comodos", "nombre": "Conjunto de microfibra y puntilla", "descripcion": "Corpiño taza soft con push up y cola less.", "precio": 27000, "a_pedido": true, "variantes": [], "imagenes": ["comodos-4790.png"]}, {"cod": 8214, "categoria": "comodos", "nombre": "Conjunto de morley", "descripcion": "Corpiño taza soft con push up y cola less regulable.", "precio": 27000, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-8214.png"]}, {"cod": 8060, "categoria": "comodos", "nombre": "Conjunto de algodón y puntilla", "descripcion": "Corpiño taza soft con push up y vedetina.", "precio": 25000, "a_pedido": false, "variantes": [{"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["comodos-8060.png"]}, {"cod": 6001, "categoria": "comodos", "nombre": "Conjunto de algodón", "descripcion": "Conjunto de algodón estampado mini corazones. Corpiño triangulito y cola less.", "precio": 12800, "a_pedido": false, "variantes": [{"talle": "90", "color": "morado", "stock": 1}], "imagenes": ["comodos-6001.png"]}, {"cod": 3025, "categoria": "comodos", "nombre": "Conjunto de algodon", "descripcion": "conjunto de algodon y puntilla con cola less. Top y less con puntilla.", "precio": 15000, "a_pedido": false, "variantes": [{"talle": "talle 4", "color": "negro", "stock": 1}], "imagenes": ["comodos-3025.png"]}, {"cod": 1001, "categoria": "encaje", "nombre": "Lencería de encaje", "descripcion": "Conjunto de puntilla. Corpiño triangulito y cola less regulable.", "precio": 13000, "a_pedido": false, "variantes": [{"talle": "90", "color": "rosa vintage", "stock": 1}], "imagenes": ["encaje-1001.png"]}, {"cod": 3009, "categoria": "comodos", "nombre": "Conjunto de algodón", "descripcion": "Conjunto taza soft de algodon con vedetina", "precio": 19600, "a_pedido": false, "variantes": [{"talle": "90", "color": "blanco", "stock": 1}], "imagenes": ["comodos-3009.png"]}, {"cod": 1007, "categoria": "encaje", "nombre": "Conjunto de encaje", "descripcion": "Conjunto de encaje. Corpiño taza soft con push up y cola less.", "precio": 21200, "a_pedido": false, "variantes": [{"talle": "95", "color": "rosa vintage", "stock": 1}], "imagenes": ["encaje-1007.png"]}, {"cod": 1003, "categoria": "encaje", "nombre": "Conjunto de encaje", "descripcion": "Conjunto de puntilla. Corpiño triangulito taza soft sin push up y cola less.", "precio": 18000, "a_pedido": false, "variantes": [{"talle": "85", "color": "rosa vintage", "stock": 1}, {"talle": "90", "color": "rosa vintage", "stock": 1}, {"talle": "95", "color": "uva", "stock": 1}], "imagenes": ["encaje-1003.png"]}, {"cod": 2016, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Conjunto de microfibra, corpiño top con breteles de elástico personalizado, y cola less.", "precio": 15300, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["comodos-2016.png"]}, {"cod": 4000, "categoria": "comodos", "nombre": "Conjunto de microfibra y puntilla", "descripcion": "Conjunto de microfibra y puntilla. Corpiño taza soft con push up y cola less.", "precio": 27500, "a_pedido": false, "variantes": [{"talle": "85", "color": "amarillo", "stock": 1}, {"talle": "95", "color": "gris", "stock": 1}], "imagenes": ["comodos-4000.png"]}, {"cod": 5006, "categoria": "comodos", "nombre": "Conjunto top de morley", "descripcion": "Conjunto top de morley con cola less regulable", "precio": 11200, "a_pedido": true, "variantes": [], "imagenes": ["comodos-5006.png"]}, {"cod": 5005, "categoria": "comodos", "nombre": "Conjunto de microfibra", "descripcion": "Conjunto top de microfibra con cola less", "precio": 9600, "a_pedido": false, "variantes": [{"talle": "95", "color": "verde", "stock": 1}, {"talle": "100", "color": "verde", "stock": 1}], "imagenes": ["comodos-5005.png"]}, {"cod": 8240, "categoria": "comodos", "nombre": "Conjunto taza soft de morley", "descripcion": "Conjunto taza soft de morley sin costura y cola less tiro alto", "precio": 27000, "a_pedido": false, "variantes": [{"talle": "95", "color": "borravino", "stock": 1}], "imagenes": ["comodos-8240.png"]}, {"cod": 8186, "categoria": "comodos", "nombre": "Conjunto de algodón y elástico personalizado", "descripcion": "Conjunto de algodón y elástico personalizado. Corpiño triangulito taza soft sin push up y cola less.", "precio": 24000, "a_pedido": false, "variantes": [{"talle": "85", "color": "amarillo", "stock": 1}], "imagenes": ["comodos-8186.png"]}, {"cod": 2011, "categoria": "comodos", "nombre": "Conjunto de microfibra con elástico personalizado", "descripcion": "Conjunto de microfibra con elástico personalizado. Corpiño triangulito taza soft sin push up y cola less.", "precio": 20000, "a_pedido": false, "variantes": [{"talle": "85", "color": "lima", "stock": 1}], "imagenes": ["comodos-2011.png"]}, {"cod": "P97", "categoria": "bombachas", "nombre": "Soquetes mujer", "descripcion": "Soquetes de algodón", "precio": 3000, "a_pedido": true, "variantes": [{"talle": "Único", "color": "negro", "stock": 0}, {"talle": "Único", "color": "gris", "stock": 0}], "imagenes": ["bombachas-P97.png"]}, {"cod": "K29", "categoria": "bombachas", "nombre": "Medias media caña", "descripcion": "Pares de medias media caña", "precio": 4000, "a_pedido": false, "variantes": [{"talle": null, "color": "negro", "stock": 2}, {"talle": null, "color": "gris", "stock": 3}], "imagenes": ["bombachas-K29.png"]}, {"cod": 111, "categoria": "bombachas", "nombre": "Culotte less", "descripcion": "Culotte less de algodon", "precio": 2600, "a_pedido": false, "variantes": [{"talle": null, "color": null, "stock": 12}], "imagenes": ["bombachas-111.png"]}, {"cod": 112, "categoria": "bombachas", "nombre": "Cola less", "descripcion": "Cola less algodón", "precio": 2600, "a_pedido": false, "variantes": [{"talle": null, "color": null, "stock": 7}], "imagenes": ["bombachas-112.png"]}, {"cod": "P141BLANCO", "categoria": "bombachas", "nombre": "Cola less pack x 2", "descripcion": "Pack de 2 cola less de encaje", "precio": 10300, "a_pedido": false, "variantes": [{"talle": "Único", "color": "blanco", "stock": 1}], "imagenes": ["bombachas-P141BLANCO.png"]}, {"cod": "P164NEGRO", "categoria": "bombachas", "nombre": "Cola less pack x 2", "descripcion": "Pack de 2 cola less de tul", "precio": 10000, "a_pedido": false, "variantes": [{"talle": "Único", "color": "negro", "stock": 1}], "imagenes": ["bombachas-P164NEGRO.png"]}, {"cod": 301, "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack de 3 cola less de algodon con elastico personalizado", "precio": 14100, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-301.png"]}, {"cod": "P122", "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack x3 Cola less de algodón liso con estampa.", "precio": 16000, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-P122.png"]}, {"cod": "P127", "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack x3 Cola less algodón y elástico personalizado.", "precio": 14500, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-P127-1.png", "bombachas-P127-2.png"]}, {"cod": 8237, "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Pack de 3 cola less pegadas/sin costura de microfibra, regulables", "precio": 23000, "a_pedido": false, "variantes": [{"talle": "Único", "color": "blanco", "stock": 1}], "imagenes": ["bombachas-8237.png"]}, {"cod": 8239, "categoria": "bombachas", "nombre": "Cola less pack x 3", "descripcion": "Bombachas pegadas sin costuras", "precio": 22500, "a_pedido": false, "variantes": [{"talle": "Único", "color": null, "stock": 1}], "imagenes": ["bombachas-8239.png"]}, {"cod": "120_kaury", "categoria": "bombachas", "nombre": "Bombachas Pack x 2", "descripcion": "Pack de 2 bombachas, talle universal, de algodón.", "precio": 15000, "a_pedido": false, "variantes": [{"talle": null, "color": null, "stock": 1}], "imagenes": ["120_kaury.png"]}, {"cod": 1016, "categoria": "encaje", "nombre": "Conjunto de puntilla con aro y lees de microfibra", "descripcion": "Este conjunto incluye un corpiño con aro que brinda soporte y realce, acompañado de una colaless confeccionada en puntilla suave, perfecta para ocasiones en las que querés sentirte diferente.\n\nCaracterísticas principales:\nDiseño: Puntilla delicada y corpiño con aro que ayuda a realzar tu figura.\nEstilo: Colaless para un look moderno y atractivo.", "precio": 16300, "a_pedido": false, "variantes": [{"talle": "85", "color": "blanco", "stock": 1}], "imagenes": ["1016_besol.png"]}, {"cod": 8675, "categoria": "comodos", "nombre": "Conjunto Deportivo", "descripcion": "Este conjunto está confeccionado en una suave mezcla de algodón y lycra, asegurando una sensación agradable y una elasticidad óptima que se adapta perfectamente a tu cuerpo.\n\nCaracterísticas destacadas:\n\nMaterial: Algodón con lycra, ideal para uso cotidiano o deportivo.\nDiseño: Liso, con elástico personalizado que aporta un toque moderno y distintivo.\nIncluye: Corpiño top y colaless para una mayor libertad de movimiento.", "precio": 17000, "a_pedido": false, "variantes": [{"talle": "3", "color": "blanco", "stock": 0}, {"talle": "4", "color": "blanco", "stock": 1}], "imagenes": ["6875_besol.png"]}, {"cod": "101L", "categoria": "bombachas", "nombre": "Soquetes Pack x 3", "descripcion": "Material: Algodón y elastano\nEstilo: Soquete\nTalle: Único\nColores: Surtidos\nEste pack no solo destaca por su diseño moderno y versátil, sino que también te brinda una suavidad excepcional gracias a su confección en algodón y elastano. Perfecto para cualquier ocasión, desde tu rutina diaria hasta esos momentos especiales.", "precio": 8600, "a_pedido": false, "variantes": [{"talle": null, "color": "colores surtidos", "stock": 0}], "imagenes": ["101L_besol.png"]}, {"cod": "101L.u", "categoria": "bombachas", "nombre": "Soquetes mujer", "descripcion": "Material: Algodón y elastano\nEstilo: Soquete\nTalle: Único\nColores: Surtidos\nEste pack no solo destaca por su diseño moderno y versátil, sino que también te brinda una suavidad excepcional gracias a su confección en algodón y elastano. Perfecto para cualquier ocasión, desde tu rutina diaria hasta esos momentos especiales.", "precio": 3000, "a_pedido": false, "variantes": [{"talle": null, "color": "colores surtidos", "stock": 0}], "imagenes": ["101L_besol.u.png"]}, {"cod": 8185, "categoria": "comodos", "nombre": "Conjunto De Algodón, Triangulito Y Cola Less", "descripcion": "Perfecto para quienes buscan una prenda íntima que se adapte suavemente a su cuerpo, este conjunto está confeccionado en algodón y elástico personalizado.\n\nCaracterísticas destacadas:\n\nMaterial: Algodón y elástico para una sensación suave y ajuste impecable.\nDiseño: Corpiño triangulito y cola less que realzan tu figura.", "precio": 19000, "a_pedido": false, "variantes": [{"talle": "95", "color": "blanco", "stock": 1}, {"talle": "90", "color": "negro", "stock": 1}], "imagenes": ["8185_besol.png"]}, {"cod": 117, "categoria": "bombachas", "nombre": "Colaless Morley Pack X 3", "descripcion": "Colaless Morley Pack X 3, la elección perfecta que combina estilo, confort y calidad para tu día a día.\n\nCaracterísticas destacadas:\nMaterial: Confeccionadas en morley de alta calidad, garantizando una suavidad y durabilidad excepcionales.\nDiseño: Colaless, ideal para cualquier ocasión, proporcionando un ajuste perfecto y libre de marcas.\nPack: Incluye tres bombachas en colores surtidos, adaptándose a tus preferencias y necesidades.", "precio": 17000, "a_pedido": false, "variantes": [{"talle": null, "color": "colores surtidos", "stock": 2}], "imagenes": ["117_besol.png"]}, {"cod": 148, "categoria": "bombachas", "nombre": "Top de Morley", "descripcion": "Este top con frunce está confeccionado en morley de alta calidad, garantizando suavidad y durabilidad.\n\nCaracterísticas destacadas:\n\nMaterial: - Morley de alta calidad, proporcionando una textura suave y resistente.\n\nDiseño: - Frunce delicado que añade un toque de sofisticación.", "precio": 14300, "a_pedido": false, "variantes": [{"talle": "M", "color": "gris", "stock": 1}, {"talle": "L", "color": "rosa", "stock": 1}], "imagenes": ["148_besol.png"]}, {"cod": 1287, "categoria": "encaje", "nombre": "Conjunto de puntilla con aro", "descripcion": "Este conjunto incluye un corpiño bustier con aro y una colaless, diseñados para brindarte comodidad y estilo en todo momento.\n\nMaterial: Puntilla y tul fantasía\n\nLa puntilla y el tul fantasía de este conjunto ofrecen un diseño sofisticado, perfecto para cualquier ocasión. El corpiño bustier garantiza un soporte ideal, mientras que la colaless asegura un ajuste cómodo y atractivo.", "precio": 23000, "a_pedido": false, "variantes": [{"talle": "95", "color": "negro", "stock": 1}], "imagenes": ["1287_besol.png"]}, {"cod": 155, "categoria": "bombachas", "nombre": "Pack x 3 Cola Less de Puntilla", "descripcion": "Cada prenda está confeccionada en delicada puntilla, aportando un toque elegante y sensual, mientras que el elástico personalizado asegura un calce perfecto y firme.\n\nCaracterísticas destacadas:\n\nPack x 3 unidades: Más opciones para combinar y disfrutar.\nMaterial: Puntilla suave y resistente, que se adapta suavemente a tu cuerpo.\nElástico personalizado: Mayor ajuste y diseño exclusivo.", "precio": 15600, "a_pedido": false, "variantes": [{"talle": null, "color": "colores surtidos", "stock": 0}], "imagenes": ["155_besol.png"]}];
 const categorias = ["comodos","encaje","bombachas"];
+const nombreCategoria = {comodos:"Conjuntos Supercómodos", encaje:"Lencería de Puntilla y Encaje", bombachas:"Bombachas, Culotes, Medias y Corpiños"};
+
 let slides = [];
 categorias.forEach(cat=>{
   productos.filter(p=>p.categoria===cat).forEach(p=>{
@@ -483,39 +542,64 @@ categorias.forEach(cat=>{
     });
   });
 });
+
+function esc(t){
+  return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function normalizar(t){
+  return String(t==null?'':t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+}
 function formatoPrecio(p){
   if(p===null || p===undefined) return "A pedido";
   return "$" + p.toLocaleString('es-AR');
 }
-function crearTarjeta(p, slideIndex){
+function sinStockDisponible(p){
+  return p.a_pedido || !p.variantes || !p.variantes.length || p.variantes.every(v => !(v.stock > 0));
+}
+
+// Texto de busqueda de cada producto (sin tildes, en minusculas)
+productos.forEach(p=>{
+  p._busq = normalizar([
+    p.nombre, p.cod, p.descripcion, nombreCategoria[p.categoria],
+    ...(p.variantes||[]).map(v=>v.color),
+    ...(p.variantes||[]).map(v=>v.talle)
+  ].filter(x=>x!==null && x!==undefined && x!=='').join(' '));
+});
+
+function indiceSlide(p){
+  return slides.findIndex(s => s.cod === p.cod && s.categoria === p.categoria && s.imagen === p.imagenes[0]);
+}
+
+function crearTarjeta(p){
   const div = document.createElement('div');
   div.className = 'card';
-  const textoBusqueda = [p.nombre, p.cod, p.descripcion, ...(p.variantes||[]).map(v=>v.color), ...(p.variantes||[]).map(v=>v.talle)]
-    .filter(Boolean).join(' ').toLowerCase();
-  div.dataset.search = textoBusqueda;
+  const etiquetaBoton = sinStockDisponible(p) ? 'Encargar' : 'Comprar';
   div.innerHTML = `
     <div class="foto">
-      <img src="img/${p.imagenes[0]}" alt="${p.nombre}" loading="lazy" onload="this.classList.add('cargada')">
+      <img src="img/${esc(p.imagenes[0])}" alt="${esc(p.nombre)}" loading="lazy" onload="this.classList.add('cargada')" onerror="this.classList.add('cargada')">
     </div>
     <div class="info">
-      <h3>${p.nombre} <span class="cod">(COD ${p.cod})</span></h3>
+      <h3>${esc(p.nombre)} <span class="cod">(COD ${esc(p.cod)})</span></h3>
       ${(p.precio !== null && p.precio !== undefined) ? `<div class="precio ${p.a_pedido ? 'pedido' : ''}">${formatoPrecio(p.precio)}</div>` : ''}
-      <button type="button" class="btn-comprar-card">Comprar</button>
+      <button type="button" class="btn-comprar-card">${etiquetaBoton}</button>
     </div>
   `;
-  div.addEventListener('click', ()=> abrirLightbox(slideIndex));
+  const idx = indiceSlide(p);
+  div.addEventListener('click', ()=> abrirLightbox(idx));
   return div;
 }
+
 const gridComodos = document.getElementById('grid-comodos');
 const gridEncaje = document.getElementById('grid-encaje');
 const gridBombachas = document.getElementById('grid-bombachas');
 productos.forEach(p=>{
-  const idx = slides.findIndex(s => s.cod === p.cod && s.categoria === p.categoria && s.imagen === p.imagenes[0]);
-  const tarjeta = crearTarjeta(p, idx);
+  const tarjeta = crearTarjeta(p);
   if(p.categoria === 'comodos') gridComodos.appendChild(tarjeta);
   if(p.categoria === 'encaje') gridEncaje.appendChild(tarjeta);
   if(p.categoria === 'bombachas') gridBombachas.appendChild(tarjeta);
 });
+
+/* VISOR DE PRODUCTO */
 const lightbox = document.getElementById('lightbox');
 const lbImg = document.getElementById('lbImg');
 const lbNombre = document.getElementById('lbNombre');
@@ -527,12 +611,16 @@ const TEL_MARIANA = '5492364457857';
 const TEL_MACARENA = '5492352550414';
 function fraseStock(stock){
   if(stock === null || stock === undefined) return '';
-  if(stock === 1) return '¡Queda el último!';
-  return `${stock} disponibles`;
+  if(stock <= 0) return '<span class="frase-stock agotado">Agotado</span>';
+  if(stock === 1) return '<span class="frase-stock">¡Queda el último!</span>';
+  return `<span class="frase-stock">${stock} disponibles</span>`;
 }
 function detalleVariante(v){
   const partes = [];
-  if(v.talle) partes.push(`Talle ${v.talle}`);
+  if(v.talle){
+    const t = String(v.talle);
+    partes.push(/^talle/i.test(t) ? t : `Talle ${t}`);
+  }
   if(v.color) partes.push(v.color);
   return partes.join(', ');
 }
@@ -561,24 +649,24 @@ function renderSlide(i){
   lbNombre.textContent = `${s.nombre} (COD ${s.cod})`;
   lbPrecio.textContent = (s.precio !== null && s.precio !== undefined) ? formatoPrecio(s.precio) : '';
   lbDesc.textContent = s.descripcion || '';
-  const sinStockTotal = s.variantes && s.variantes.length && s.variantes.every(v => !(v.stock > 0));
-  if(s.a_pedido || !s.variantes || !s.variantes.length || sinStockTotal){
+  if(sinStockDisponible(s)){
     lbVariantes.innerHTML = `<div class="sin-stock"><p class="sin-stock-msg">Ya agotamos el stock de este producto, pero podés encargarlo desde acá</p><a class="btn-encargar" href="${linkEncargar(s)}" target="_blank" rel="noopener">Encargar</a></div>`;
   } else {
-    let html = '<div class="stock-titulo">Talles y colores disponibles</div>';
+    let html = '<div class="stock-titulo">Talles y colores</div>';
     s.variantes.forEach(v=>{
       const disponible = v.stock !== null && v.stock !== undefined && v.stock > 0;
       const boton = disponible ? `<a class="btn-comprar" href="${linkComprar(s, v)}" target="_blank" rel="noopener">Comprar</a>` : '';
       const partesEtiqueta = [];
-      if(v.talle) partesEtiqueta.push(`Talle <b>${v.talle}</b>`);
-      if(v.color) partesEtiqueta.push(v.color);
+      if(v.talle) partesEtiqueta.push(`Talle <b>${esc(v.talle)}</b>`);
+      if(v.color) partesEtiqueta.push(esc(v.color));
       const etiqueta = partesEtiqueta.length ? partesEtiqueta.join(' · ') : 'Producto único';
-      html += `<div class="variante"><span>${etiqueta}</span><span class="frase-stock">${fraseStock(v.stock)}</span>${boton}</div>`;
+      html += `<div class="variante"><span>${etiqueta}</span>${fraseStock(v.stock)}${boton}</div>`;
     });
     lbVariantes.innerHTML = html;
   }
 }
 function abrirLightbox(i){
+  if(i < 0) return;
   indiceActual = i;
   renderSlide(indiceActual);
   lightbox.classList.add('activo');
@@ -607,28 +695,82 @@ document.addEventListener('keydown', (e)=>{
   if(e.key === 'ArrowRight') siguiente();
   if(e.key === 'ArrowLeft') anterior();
 });
+// Deslizar con el dedo en el celular para pasar de foto
+let toqueX = null;
+lightbox.addEventListener('touchstart', (e)=>{ toqueX = e.touches[0].clientX; }, {passive:true});
+lightbox.addEventListener('touchend', (e)=>{
+  if(toqueX === null) return;
+  const dx = e.changedTouches[0].clientX - toqueX;
+  toqueX = null;
+  if(Math.abs(dx) > 60){ dx < 0 ? siguiente() : anterior(); }
+}, {passive:true});
+
+/* MENU */
 const menuToggle = document.getElementById('menuToggle');
 const menuNav = document.getElementById('menuNav');
 menuToggle.addEventListener('click', ()=> menuNav.classList.toggle('abierto'));
 menuNav.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> menuNav.classList.remove('abierto')));
-// BUSCADOR
+
+/* BUSCADOR: los resultados aparecen justo debajo de la lupa */
 const buscadorInput = document.getElementById('buscadorInput');
-const sinResultadosComodos = document.getElementById('sinResultadosComodos');
-const sinResultadosEncaje = document.getElementById('sinResultadosEncaje');
-const sinResultadosBombachas = document.getElementById('sinResultadosBombachas');
-function filtrarProductos(){
-  const q = buscadorInput.value.trim().toLowerCase();
-  [{grid:gridComodos, aviso:sinResultadosComodos},{grid:gridEncaje, aviso:sinResultadosEncaje},{grid:gridBombachas, aviso:sinResultadosBombachas}].forEach(({grid,aviso})=>{
-    let visibles = 0;
-    grid.querySelectorAll('.card').forEach(card=>{
-      const coincide = !q || card.dataset.search.includes(q);
-      card.style.display = coincide ? '' : 'none';
-      if(coincide) visibles++;
-    });
-    aviso.style.display = visibles === 0 ? 'block' : 'none';
-  });
+const buscador = document.getElementById('buscador');
+const buscadorWrap = document.getElementById('buscadorWrap');
+const buscadorLimpiar = document.getElementById('buscadorLimpiar');
+const resultados = document.getElementById('resultados');
+const resultadosTitulo = document.getElementById('resultadosTitulo');
+const gridResultados = document.getElementById('grid-resultados');
+const resultadosVacio = document.getElementById('resultadosVacio');
+const accesos = document.getElementById('accesos');
+
+function puntaje(p, q){
+  const cod = normalizar(p.cod);
+  if(cod === q) return 3;
+  if(cod.startsWith(q)) return 2;
+  return 0;
 }
-buscadorInput.addEventListener('input', filtrarProductos);
+function buscar(){
+  const textoOriginal = buscadorInput.value.trim();
+  const q = normalizar(textoOriginal);
+  const estabaActivo = resultados.classList.contains('activo');
+  buscador.classList.toggle('con-texto', !!q);
+  if(!q){
+    resultados.classList.remove('activo');
+    gridResultados.innerHTML = '';
+    accesos.style.display = '';
+    return;
+  }
+  const palabras = q.split(/\s+/);
+  const hits = productos
+    .filter(p => palabras.every(w => p._busq.includes(w)))
+    .sort((a,b) => puntaje(b,q) - puntaje(a,q));
+  gridResultados.innerHTML = '';
+  hits.forEach(p => gridResultados.appendChild(crearTarjeta(p)));
+  resultadosTitulo.textContent = hits.length
+    ? `${hits.length} ${hits.length === 1 ? 'resultado' : 'resultados'} para “${textoOriginal}”`
+    : `Sin resultados para “${textoOriginal}”`;
+  resultadosVacio.style.display = hits.length ? 'none' : 'block';
+  gridResultados.style.display = hits.length ? '' : 'none';
+  accesos.style.display = 'none';
+  resultados.classList.add('activo');
+  if(!estabaActivo){
+    const top = buscadorWrap.getBoundingClientRect().top;
+    if(top > window.innerHeight * 0.35 || top < 70){
+      buscadorWrap.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+}
+buscadorInput.addEventListener('input', buscar);
+buscadorInput.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter'){ e.preventDefault(); buscadorInput.blur(); }
+  if(e.key === 'Escape'){ buscadorInput.value = ''; buscar(); }
+});
+buscadorLimpiar.addEventListener('click', ()=>{
+  buscadorInput.value = '';
+  buscar();
+  buscadorInput.focus();
+});
+
+/* ABRIR PRODUCTO DESDE LINK (?cod=XXXX) */
 const parametrosURL = new URLSearchParams(location.search);
 const codInicial = parametrosURL.get('cod');
 if(codInicial){
